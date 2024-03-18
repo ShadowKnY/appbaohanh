@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
     @Override
     public PopularAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ViewholderPupListBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        context = parent.getContext();
         return new Viewholder(binding);
     }
 
@@ -44,6 +46,13 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
                 .load(drawableResourced)
                 .transform(new GranularRoundedCorners(30,30,0,0))
                 .into(binding.pic);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
