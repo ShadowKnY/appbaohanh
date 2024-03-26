@@ -31,6 +31,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(i);
             }
         }, 2500); // Chuyển đổi sau 5 giây
-        finish();
+
     }
 }
