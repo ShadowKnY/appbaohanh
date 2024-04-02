@@ -167,14 +167,13 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/iPhone_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/dis_ip"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/cat1" />
@@ -190,14 +189,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Mac_List"
+                    android:id="@+id/linear_mac"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/dis_mac"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         app:srcCompat="@drawable/cat2" />
@@ -213,14 +212,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/iPad_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/dis_ipad"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         app:srcCompat="@drawable/cat3" />
@@ -236,14 +234,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Watch_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView14"
+                        android:id="@+id/dis_watch"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         app:srcCompat="@drawable/cat4" />
@@ -259,7 +256,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/allProc_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -407,7 +403,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/Cart_menu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

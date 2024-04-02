@@ -3,84 +3,72 @@ package com.example.myapplication.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.PopularAdapter;
+import com.example.myapplication.Display.IpadDisplay;
+import com.example.myapplication.Display.IphoneDisplay;
+import com.example.myapplication.Display.MacDisplay;
+import com.example.myapplication.Display.WatchDisplay;
 import com.example.myapplication.R;
-import com.example.myapplication.SplashScreen;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.domain.PopularDomain;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout iPhone;
-    LinearLayout Mac;
-    LinearLayout Ipad;
-    LinearLayout Watch;
-    LinearLayout more;
-    LinearLayout Cart_menu;
 ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        iPhone = findViewById(R.id.iPhone_List);
-        iPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, SplashScreen.class);
-                startActivity(i);
-            }
-        });
-        Mac = findViewById(R.id.Mac_List);
-        Mac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SplashScreen.class);
-                startActivity(i);
-            }
-        });
-        Ipad = findViewById(R.id.iPad_List);
-        Ipad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SplashScreen.class);
-                startActivity(i);
-            }
-        });
-        Watch = findViewById(R.id.Watch_List);
-        Watch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SplashScreen.class);
-                startActivity(i);
-            }
-        });
 
-        more = findViewById(R.id.allProc_List);
-        more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SplashScreen.class);
-                startActivity(i);
-            }
-        });
-
-        Cart_menu = findViewById(R.id.Cart_menu);
-        Cart_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Cart.class);
-                startActivity(i);
-            }
-        });
         initRecycleView();
-        
+
+        //chuyển sang các layout Display iph,ip,...
+                ImageView im_iph, im_mac, im_ip, im_watch;
+
+        im_iph = findViewById(R.id.dis_ip);
+        im_mac = findViewById(R.id.dis_mac);
+        im_ip = findViewById(R.id.dis_ipad);
+        im_watch = findViewById(R.id.dis_watch);
+
+        im_iph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IphoneDisplay.class);
+                startActivity(intent);
+            }
+        });
+
+        im_mac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MacDisplay.class);
+                startActivity(intent);
+            }
+        });
+
+        im_ip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+                startActivity(intent);
+            }
+        });
+
+        im_watch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WatchDisplay.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initRecycleView() {
