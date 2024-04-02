@@ -167,6 +167,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/iPhone_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -189,6 +190,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/Mac_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -211,6 +213,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/iPad_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -233,6 +236,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/Watch_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -255,6 +259,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/allProc_List"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -402,6 +407,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/Cart_menu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
