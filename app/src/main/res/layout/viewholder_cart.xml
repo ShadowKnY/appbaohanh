@@ -23,7 +23,6 @@
         android:id="@+id/pic"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@tools:sample/avatars"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintStart_toStartOf="@+id/view4"
