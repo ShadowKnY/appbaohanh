@@ -1,7 +1,7 @@
 package com.example.myapplication.Display;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IpadDisplay extends AppCompatActivity {
-    private EditText edtTitle,edtPrice,edtScr,edtReview;
+
     private RecyclerView rcvProduct;
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
-    private String category;
+    String category;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,47 +35,35 @@ public class IpadDisplay extends AppCompatActivity {
 
         initUI();
 
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            category = intent.getStringExtra("category");
-//            // Kiểm tra xem category có giá trị hay không
-//            if (category != null && !category.isEmpty()) {
-//                // Gọi phương thức để lấy danh sách sản phẩm từ Firebase dựa trên category
-//                getListFromRealTimeDb(category);
-//            }
-//        }
-
-
-        getListFromRealTimeDb();
-
-
+        Intent intent = getIntent();
+        if (intent != null) {
+            category = intent.getStringExtra("category");
+            if (category != null && !category.isEmpty()) {
+                getListFromRealTimeDb(category);
+            }
+        }
     }
-    private void initUI(){
-//        edtTitle = findViewById(R.id.titleTxt);
-//        edtPrice = findViewById(R.id.feeTxt);
+
+    private void initUI() {
         rcvProduct = findViewById(R.id.ipadView);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         rcvProduct.setLayoutManager(gridLayoutManager);
 
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL);
-//        rcvProduct.addItemDecoration(dividerItemDecoration);
         mlistProduct = new ArrayList<>();
         mdisplayAdapter = new displayAdapter(mlistProduct);
         rcvProduct.setAdapter(mdisplayAdapter);
     }
-    private void getListFromRealTimeDb(){
+
+    private void getListFromRealTimeDb(String category) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myProd = database.getReference("Product").child("iPhone");
+        DatabaseReference myProd = database.getReference("Product").child(category);
         myProd.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mlistProduct.clear();
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    // Lặp qua tất cả các sản phẩm trong danh mục "iPhone"
-                    for (DataSnapshot itemSnapshot : productSnapshot.getChildren()) {
-                        PopularDomain product = itemSnapshot.getValue(PopularDomain.class);
-                        mlistProduct.add(product);
-                    }
+                    PopularDomain product = productSnapshot.getValue(PopularDomain.class);
+                    mlistProduct.add(product);
                 }
                 mdisplayAdapter.notifyDataSetChanged();
             }
@@ -85,6 +74,5 @@ public class IpadDisplay extends AppCompatActivity {
             }
         });
     }
-
-
 }
+
