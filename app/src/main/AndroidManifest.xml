@@ -16,7 +16,7 @@
             android:name=".add_edit_delete.addActivity"
             android:exported="false" />
         <activity
-            android:name=".Display.IpadDisplay"
+            android:name=".add_edit_delete.Display.IpadDisplay"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
