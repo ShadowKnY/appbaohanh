@@ -13,19 +13,11 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Display.WatchDisplay"
-            android:exported="false" />
-        <activity
             android:name=".Display.IpadDisplay"
             android:exported="false" />
+
         <activity
-            android:name=".Display.MacDisplay"
-            android:exported="false" />
-        <activity
-            android:name=".Display.IphoneDisplay"
-            android:exported="false" />
-        <activity
-            android:name=".LoginTest"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity" />
+
     </application>
 
 </manifest>
