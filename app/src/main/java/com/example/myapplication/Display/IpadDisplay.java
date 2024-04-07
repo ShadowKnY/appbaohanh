@@ -2,6 +2,7 @@ package com.example.myapplication.Display;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.displayAdapter;
 import com.example.myapplication.R;
+import com.example.myapplication.add_edit_delete.addActivity;
 import com.example.myapplication.domain.PopularDomain;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,11 +30,20 @@ public class IpadDisplay extends AppCompatActivity {
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
     String category;
-
+    FloatingActionButton addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        addBtn = findViewById(R.id.addCircle);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(IpadDisplay.this, addActivity.class);
+                i.putExtra("category",category);
+                startActivity(i);
+            }
+        });
 
         initUI();
 

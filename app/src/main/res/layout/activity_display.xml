@@ -152,7 +152,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/qrcode"
+            android:id="@+id/addCircle"
             app:backgroundTint="@color/purple_Dark"
             app:layout_anchor="@id/appBar"
             app:maxImageSize="30dp"
