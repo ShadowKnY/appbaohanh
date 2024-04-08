@@ -170,6 +170,13 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/rounded_button_bg"/>
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/logout_button"
+        android:text="Đăng xuất"
+        android:textSize="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_button_bg"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

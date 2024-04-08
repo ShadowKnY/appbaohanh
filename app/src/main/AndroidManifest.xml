@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,9 +15,15 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name="info.info"
+            android:name="info.changephone"
             android:exported="false">
         </activity>
+        <activity
+            android:name="info.changename"
+            android:exported="false"></activity>
+        <activity
+            android:name="info.info"
+            android:exported="false" />
         <activity
             android:name=".add_edit_delete.addActivity"
             android:exported="false" />
