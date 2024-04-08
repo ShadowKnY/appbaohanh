@@ -82,8 +82,8 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <EditText
-                    android:id="@+id/editTextText8"
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="24dp"
@@ -262,7 +262,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/dis_more"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         app:srcCompat="@drawable/cat5" />
@@ -403,6 +403,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/menu_cart"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

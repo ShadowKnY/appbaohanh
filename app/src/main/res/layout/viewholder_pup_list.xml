@@ -6,7 +6,8 @@
     android:layout_height="240dp"
     android:layout_margin="8dp"
     android:background="@drawable/white_background"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    android:id="@+id/viewholderpuplist">
 
     <ImageView
         android:id="@+id/pic"

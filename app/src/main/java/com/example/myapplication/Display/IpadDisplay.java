@@ -3,6 +3,7 @@ package com.example.myapplication.Display;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Activity.Cart;
 import com.example.myapplication.Adapter.displayAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.addActivity;
@@ -26,6 +28,8 @@ import java.util.List;
 
 public class IpadDisplay extends AppCompatActivity {
 
+
+    LinearLayout menu_cart;
     private RecyclerView rcvProduct;
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
@@ -35,12 +39,21 @@ public class IpadDisplay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        menu_cart = findViewById(R.id.menu_cart);
         addBtn = findViewById(R.id.addCircle);
+
+        menu_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Cart.class);
+                startActivity(intent);
+            }
+        });
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(IpadDisplay.this, addActivity.class);
-                i.putExtra("category",category);
+                i.putExtra("category", category);
                 startActivity(i);
             }
         });
@@ -51,10 +64,15 @@ public class IpadDisplay extends AppCompatActivity {
         if (intent != null) {
             category = intent.getStringExtra("category");
             if (category != null && !category.isEmpty()) {
-                getListFromRealTimeDb(category);
+                if (intent.getBooleanExtra("showAllProducts", false)) {
+                    showAllProducts();
+                } else {
+                    getListFromRealTimeDb(category);
+                }
             }
         }
     }
+
 
     private void initUI() {
         rcvProduct = findViewById(R.id.ipadView);
@@ -86,5 +104,28 @@ public class IpadDisplay extends AppCompatActivity {
             }
         });
     }
+    private void showAllProducts() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference productRef = database.getReference("Product");
+        productRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mlistProduct.clear();
+                for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot productSnapshot : categorySnapshot.getChildren()) {
+                        PopularDomain product = productSnapshot.getValue(PopularDomain.class);
+                        mlistProduct.add(product);
+                    }
+                }
+                mdisplayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(IpadDisplay.this, "Không thể lấy dữ liệu từ cơ sở dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
 
