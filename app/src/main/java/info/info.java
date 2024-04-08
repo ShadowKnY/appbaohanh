@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,34 +65,39 @@ public class info extends AppCompatActivity {
         });
 
         // Kết nối đến Firebase
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Đây là phương thức được gọi mỗi khi dữ liệu trong tham chiếu thay đổi
+//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//        FirebaseUser user = firebaseAuth.getCurrentUser();
+//        String userId = user.getUid();
+//
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+//        ref.child(userId).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    String username = dataSnapshot.child("username").getValue(String.class);
+//                    String phone = dataSnapshot.child("phone").getValue(String.class);
+//                    String tuoi = dataSnapshot.child("tuoi").getValue(String.class);
+//                    String gt = dataSnapshot.child("gioitinh").getValue(String.class);
+//                    String date = dataSnapshot.child("ngaysinh").getValue(String.class);
+//                    String newInfo = dataSnapshot.child("newInfo").getValue(String.class);
+//
+//                    // Đẩy dữ liệu vào TextView tương ứng
+//                    textViewUsername.setText(username);
+//                    textViewPhone.setText(phone);
+//                    textViewTuoi.setText(tuoi);
+//                    textViewGt.setText(gt);
+//                    textViewDate.setText(date);
+//                    textViewNew.setText(newInfo);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Xử lý khi có lỗi xảy ra trong quá trình lấy dữ liệu từ Firebase
+//            }
+//        });
 
-                // Lấy giá trị của dữ liệu từ DataSnapshot
-                String username = dataSnapshot.child("username").getValue(String.class);
-                String phone = dataSnapshot.child("phone").getValue(String.class);
-                String tuoi = dataSnapshot.child("tuoi").getValue(String.class);
-                String gt = dataSnapshot.child("gioitinh").getValue(String.class);
-                String date = dataSnapshot.child("ngaysinh").getValue(String.class);
-                String newInfo = dataSnapshot.child("newInfo").getValue(String.class);
 
-                // Đẩy dữ liệu vào TextView tương ứng
-                textViewUsername.setText(username);
-                textViewPhone.setText(phone);
-                textViewTuoi.setText(tuoi);
-                textViewGt.setText(gt);
-                textViewDate.setText(date);
-                textViewNew.setText(newInfo);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Xử lý khi có lỗi xảy ra trong quá trình lấy dữ liệu từ Firebase
-            }
-        });
 
     }
 }
