@@ -14,13 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.SplashScreen;
-import com.example.myapplication.add_edit_delete.addActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
