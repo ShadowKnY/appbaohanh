@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +17,11 @@ import com.example.myapplication.domain.PopularDomain;
 
 import java.util.ArrayList;
 
+import info.info;
+
 public class MainActivity extends AppCompatActivity {
 ActivityMainBinding binding;
+LinearLayout linearLayoutinfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +37,7 @@ ActivityMainBinding binding;
         im_mac = findViewById(R.id.dis_mac);
         im_ip = findViewById(R.id.dis_ipad);
         im_watch = findViewById(R.id.dis_watch);
-
+        linearLayoutinfo = findViewById(R.id.layout4);
         im_iph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +70,14 @@ ActivityMainBinding binding;
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
                 intent.putExtra("category","appleWatch");
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, info.class);
                 startActivity(intent);
             }
         });
