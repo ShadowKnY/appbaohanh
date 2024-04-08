@@ -42,8 +42,8 @@ public class PopularDomain {
         return numberInChart;
     }
 
-    public double getPrice() {
-        return price;
+    public String getPrice() {
+        return price +"$";
     }
 
     public String getDecription() {

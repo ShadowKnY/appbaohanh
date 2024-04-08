@@ -1,4 +1,4 @@
-package com.example.myapplication.add_edit_delete.Display;
+package com.example.myapplication.Display;
 
 import android.content.Intent;
 import android.os.Bundle;

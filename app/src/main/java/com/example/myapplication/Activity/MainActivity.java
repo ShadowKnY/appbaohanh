@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.PopularAdapter;
-import com.example.myapplication.add_edit_delete.Display.IpadDisplay;
+import com.example.myapplication.Display.IpadDisplay;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.domain.PopularDomain;
