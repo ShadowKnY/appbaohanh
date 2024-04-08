@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.SplashScreen;
+import com.example.myapplication.add_edit_delete.addActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,17 +35,7 @@ public class lich_loginform extends AppCompatActivity {
     Button loginButton;
     TextView signupText;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), SplashScreen.class);
-            startActivity(intent);
 
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +47,7 @@ public class lich_loginform extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
-        textEmail = findViewById(R.id.email);
+//        textEmail = findViewById(R.id.email);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +57,9 @@ public class lich_loginform extends AppCompatActivity {
                 String username, password, email;
                 username = editTextUsername.getText().toString();
                 password = editTextPassword.getText().toString();
-                email = textEmail.getText().toString();
+//                email = textEmail.getText().toString();
 
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(username)){
                     Toast.makeText(lich_loginform.this, "Enter Email or Username", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -77,7 +68,7 @@ public class lich_loginform extends AppCompatActivity {
                     Toast.makeText(lich_loginform.this, "Enter Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(username, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -112,6 +103,8 @@ public class lich_loginform extends AppCompatActivity {
                 Intent i = new Intent(lich_loginform.this, ForgotActivity.class);
                 startActivity(i);
             }
+
+
         });
 
     }
