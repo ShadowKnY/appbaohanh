@@ -1,11 +1,15 @@
 package com.example.myapplication.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.PopularAdapter;
+import com.example.myapplication.Display.IpadDisplay;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.domain.PopularDomain;
@@ -21,18 +25,56 @@ ActivityMainBinding binding;
         setContentView(binding.getRoot());
 
         initRecycleView();
-        
+
+        //chuyển sang các layout Display iph,ip,...
+                ImageView im_iph, im_mac, im_ip, im_watch;
+
+        im_iph = findViewById(R.id.dis_ip);
+        im_mac = findViewById(R.id.dis_mac);
+        im_ip = findViewById(R.id.dis_ipad);
+        im_watch = findViewById(R.id.dis_watch);
+
+        im_iph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+                intent.putExtra("category","iPhone");
+                startActivity(intent);
+            }
+        });
+
+        im_mac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+                intent.putExtra("category","mac");
+                startActivity(intent);
+            }
+        });
+
+        im_ip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+                intent.putExtra("category","iPad");
+                startActivity(intent);
+            }
+        });
+
+        im_watch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+                intent.putExtra("category","appleWatch");
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initRecycleView() {
         ArrayList<PopularDomain> items = new ArrayList<>();
-        items.add(new PopularDomain("iPhone 15 Pro Max ","item_1",15,4,2,999,"Khung Titanium bền bỉ chống va đập và tối ưu trọng lượng tốt hơn các phiên bản khung nhôm. Thêm nữa, viền màn hình máy thu nhỏ mang đến diện mạo hoàn toàn mới, sang trọng và cuốn hút. \n" +
-                "\n" +
-                "Cổng sạc USB-C 3 thay thế cổng Lightning hỗ trợ tốc độ truyền tải lên đến 10Gbps. Người dùng có thể dễ dàng mượn sạc sử dụng trong trường hợp quên mang theo\n" +
-                "\n" +
-                "Về phần cứng, con chip A17 Pro cho thấy hiệu năng vượt trội 10% nhân CPU và 20% nhân GPU so với A16 Bionic. Ngoài ra, vi xử lý mới còn hỗ trợ ray tracing nhanh gấp 4 lần mang đến trải nghiệm đồ họa gaming mượt mà. \n" +
-                "\n" +
-                "Đều đặn mỗi năm, Apple sẽ ra mắt một phiên bản màu sắc mới, năm nay cũng không phải ngoại lệ với sự xuất hiện của màu Titan tự nhiên. Gam màu độc đáo hứa hẹn sẽ được nhiều người dùng đón nhận. "));
+        items.add(new PopularDomain("iPhone 15 Pro Max ","item_1",15,4,2,999,""));
         items.add(new PopularDomain("iPhone 14 Pro","item_3",50,4.8,15,899,""));
         items.add(new PopularDomain("Apple Watch Ultra","cat4",24,4,25,699,""));
         items.add(new PopularDomain("iPad Pro 2023","cat3",11,3,26,799,""));
