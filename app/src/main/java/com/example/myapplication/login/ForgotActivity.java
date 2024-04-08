@@ -1,4 +1,6 @@
 package com.example.myapplication.login;
 
-public class ForgotActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ForgotActivity extends AppCompatActivity {
 }

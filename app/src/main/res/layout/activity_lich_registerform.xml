@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:id="@+id/WelcomeText"
         android:textSize="36sp"
         android:textAlignment="center"
@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:text="@string/register"
                 android:id="@+id/registerText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -53,7 +53,7 @@
                 android:background="@drawable/login_form_1"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:padding="8dp"
                 android:textColor="@color/purple"
                 android:textColorHighlight="@color/cardview_dark_background"/>
@@ -66,7 +66,7 @@
                 android:background="@drawable/login_form_1"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:padding="8dp"
                 android:inputType="text"
                 android:textColor="@color/purple"
@@ -80,7 +80,7 @@
                 android:background="@drawable/login_form_1"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:padding="8dp"
                 android:inputType="textPassword"
                 android:textColor="@color/purple"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/registerButton"
-                android:text="Register"
+                android:text="@string/register"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple_Dark"
@@ -99,15 +99,31 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/forgotButton"
         android:layout_width="351dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/purple"
-        android:text="Forgot Password"
+        android:text="@string/forgot_password"
         android:textSize="18sp"
         app:cornerRadius="10dp" />
 
+    <TextView
+        android:id="@+id/LoginNow"
+        android:text="@string/click_here_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textColor="@color/purple_Dark"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
