@@ -16,6 +16,7 @@ import com.example.myapplication.Adapter.displayAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.addActivity;
 import com.example.myapplication.domain.PopularDomain;
+import com.example.myapplication.info.info;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +30,7 @@ import java.util.List;
 public class IpadDisplay extends AppCompatActivity {
 
 
-    LinearLayout menu_cart;
+    LinearLayout menu_cart,menu_in4;
     private RecyclerView rcvProduct;
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
@@ -40,12 +41,20 @@ public class IpadDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
         menu_cart = findViewById(R.id.menu_cart);
+        menu_in4 = findViewById(R.id.menu_in4);
         addBtn = findViewById(R.id.addCircle);
 
         menu_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Cart.class);
+                startActivity(intent);
+            }
+        });
+        menu_in4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), info.class);
                 startActivity(intent);
             }
         });

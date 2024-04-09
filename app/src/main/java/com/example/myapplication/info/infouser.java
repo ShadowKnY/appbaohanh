@@ -1,4 +1,4 @@
-package info;
+package com.example.myapplication.info;
 
 public class infouser {
     private String username;
