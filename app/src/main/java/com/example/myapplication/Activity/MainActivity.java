@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,15 +27,12 @@ ActivityMainBinding binding;
         initRecycleView();
 
         //chuyển sang các layout Display iph,ip,...
-        ImageView im_iph, im_mac, im_ip, im_watch,im_more;
-        LinearLayout menu_cart;
+                ImageView im_iph, im_mac, im_ip, im_watch;
 
         im_iph = findViewById(R.id.dis_ip);
         im_mac = findViewById(R.id.dis_mac);
         im_ip = findViewById(R.id.dis_ipad);
         im_watch = findViewById(R.id.dis_watch);
-        im_more = findViewById(R.id.dis_more);
-        menu_cart = findViewById(R.id.menu_cart);
 
         im_iph.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,23 +66,6 @@ ActivityMainBinding binding;
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
                 intent.putExtra("category","appleWatch");
-                startActivity(intent);
-            }
-        });
-
-        im_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
-                intent.putExtra("category", "Product");
-                intent.putExtra("showAllProducts", true); // Thêm dòng này để chỉ định hiển thị tất cả các sản phẩm
-                startActivity(intent);
-            }
-        });
-        menu_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Cart.class);
                 startActivity(intent);
             }
         });
