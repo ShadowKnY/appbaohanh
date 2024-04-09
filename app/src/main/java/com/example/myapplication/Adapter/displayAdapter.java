@@ -9,21 +9,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.Activity.DetailActivity;
+import com.example.myapplication.Display.DetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.domain.PopularDomain;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductViewHolder> {
     private Context context;
     private List<PopularDomain> productList;
+    private DatabaseReference mDatabase;
 
     public displayAdapter(List<PopularDomain> productList) {
+
         this.productList = productList;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Product");
+        loadDataFromFirebase();
     }
 
     @NonNull
@@ -52,15 +62,39 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Lấy ID của sản phẩm
-                String productId = product.getID();
-                // Tạo Intent để chuyển đến DetailActivity
                 Intent intent = new Intent(context, DetailActivity.class);
-                // Truyền ID của sản phẩm qua Intent
-                intent.putExtra("product_id", productId);
-                // Khởi chạy DetailActivity
+                intent.putExtra("itemPic",product.getPicUrl());
+                intent.putExtra("titleDetail",product.getTitle());
+                intent.putExtra("priceDetail",product.getPrice());
+                intent.putExtra("ratingDetail",product.getScore());
+                intent.putExtra("reviewDetail",product.getReview());
+                intent.putExtra("descriptionDetail",product.getDecription());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
+        });
+    }
+
+    private void loadDataFromFirebase() {
+        mDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                PopularDomain product = dataSnapshot.getValue(PopularDomain.class);
+                productList.add(product);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
     }
 

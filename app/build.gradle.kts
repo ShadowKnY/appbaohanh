@@ -58,5 +58,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.airbnb.android:lottie:6.4.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
 
 }

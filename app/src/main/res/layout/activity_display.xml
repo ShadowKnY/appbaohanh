@@ -157,6 +157,7 @@
             app:backgroundTint="@color/purple_Dark"
             app:layout_anchor="@id/appBar"
             app:maxImageSize="30dp"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

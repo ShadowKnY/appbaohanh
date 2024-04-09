@@ -1,25 +1,12 @@
 package com.example.myapplication.domain;
 
 public class PopularDomain {
-    private String ID;
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public String getID() {
-        return ID;
-    }
 
     private String title;
     private String picUrl;
     private int review;
     private double score;
     private int numberInChart;
-
-    public PopularDomain(String ID) {
-        this.ID = ID;
-    }
 
     private double price;
     private  String decription;
