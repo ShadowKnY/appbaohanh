@@ -14,6 +14,11 @@ public class PopularDomain {
     public PopularDomain() {
     }
 
+    public  PopularDomain(String title,String picUrl,double price){
+        this.title= title;
+        this.picUrl = picUrl;
+        this.price = price;
+    }
     public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {
         this.title = title;
         this.picUrl = picUrl;

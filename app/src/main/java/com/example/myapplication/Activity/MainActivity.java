@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //gọi hàm để đổ dữ liệu vào recycleView
         initRecycleView();
 
-        //chuyển sang các layout Display iph,ip,...
+        //khai báo các biến
         ImageView im_iph, im_mac, im_ip, im_watch,im_more;
         LinearLayout menu_cart;
 
+        //gán id các view của mainActivity vào biến đã tạo
         im_iph = findViewById(R.id.dis_ip);
         im_mac = findViewById(R.id.dis_mac);
         im_ip = findViewById(R.id.dis_ipad);
@@ -38,12 +40,18 @@ public class MainActivity extends AppCompatActivity {
         im_more = findViewById(R.id.dis_more);
         menu_cart = findViewById(R.id.menu_cart);
 
+        //tạo sự kiện  nhấn vào view
         im_iph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+
+                //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","iPhone");
                 startActivity(intent);
+
+                //chấm dứt MainActivity
+                finish();
             }
         });
 
@@ -51,8 +59,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+
+                //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","mac");
                 startActivity(intent);
+
+                //chấm dứt MainActivity
+                finish();
             }
         });
 
@@ -60,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+
+                //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","iPad");
                 startActivity(intent);
+
+                //chấm dứt MainActivity
+                finish();
             }
         });
 
@@ -69,8 +87,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+
+                //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","appleWatch");
                 startActivity(intent);
+                //chấm dứt MainActivity
+                finish();
             }
         });
 
@@ -78,9 +100,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IpadDisplay.class);
+
+                //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category", "Product");
                 intent.putExtra("showAllProducts", true); // Thêm dòng này để chỉ định hiển thị tất cả các sản phẩm
                 startActivity(intent);
+                //chấm dứt MainActivity
+                finish();
             }
         });
         menu_cart.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Cart.class);
                 startActivity(intent);
+
             }
         });
 

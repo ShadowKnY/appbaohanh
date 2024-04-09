@@ -1,15 +1,14 @@
 package com.example.myapplication.info;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.DatePickerDialog;
-import android.widget.DatePicker;
-import java.util.Calendar;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
@@ -21,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 public class info extends AppCompatActivity {
     private static final int INFO_ACTIVITY_REQUEST_CODE = 1;
@@ -48,6 +49,7 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changename.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -56,6 +58,7 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changephone.class);
                 startActivity(intent);
+                finish();
             }
         });
         textViewTuoi.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +66,7 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changetuoi.class);
                 startActivity(intent);
+                finish();
             }
         });
         textViewGt.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +74,7 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changegt.class);
                 startActivity(intent);
+                finish();
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +89,7 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
