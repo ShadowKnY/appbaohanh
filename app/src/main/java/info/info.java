@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import info.infouser;
 import androidx.appcompat.app.AppCompatActivity;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import java.util.Calendar;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
@@ -20,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class info extends AppCompatActivity {
+    private static final int INFO_ACTIVITY_REQUEST_CODE = 1;
     private TextView textViewUsername;
     private TextView textViewPhone;
     private TextView textViewTuoi;
@@ -68,6 +72,12 @@ public class info extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        textViewDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +123,7 @@ public class info extends AppCompatActivity {
         });
 
 
+
     }
     public void logoutClick(View view) {
         logout();
@@ -124,5 +135,46 @@ public class info extends AppCompatActivity {
                  startActivity(intent);
                  finish();
     }
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // Lưu ngày sinh vào Firebase
+                saveBirthDateToFirebase(year, month, dayOfMonth);
+            }
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+    private void saveBirthDateToFirebase(int year, int month, int dayOfMonth) {
+        // Thực hiện lưu ngày sinh vào Firebase ở đây
+        String birthDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+        // Ví dụ: Lưu ngày sinh vào nút user của Firebase Realtime Database
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        String userId = user.getUid();
+        databaseRef.child("users").child(userId).child("ngaySinh").setValue(birthDate);
+        loadInfoForm();
+    }
+    private void loadInfoForm() {
+        Intent intent = new Intent(info.this, info.class);
+        startActivityForResult(intent, INFO_ACTIVITY_REQUEST_CODE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == INFO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            loadInfoForm();
+        }
+    }
+
 
 }
