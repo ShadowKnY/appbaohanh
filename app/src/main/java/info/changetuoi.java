@@ -7,62 +7,62 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-import com.example.myapplication.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class changename extends AppCompatActivity {
+import com.example.myapplication.R;
+
+public class changetuoi extends AppCompatActivity {
     private static final int INFO_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_changename);
+        setContentView(R.layout.activity_changetuoi);
 
-        Button saveButton = findViewById(R.id.buttonSave);
-        EditText editTextNewName = findViewById(R.id.editTextNewName);
+        Button buttonsave2 = findViewById(R.id.buttonSaveTuoi);
+        EditText editTextNewTuoi = findViewById(R.id.editTextNewTuoi);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        buttonsave2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newName = editTextNewName.getText().toString().trim();
-                if (!newName.isEmpty()) {
-                    updateUsernameInFirebase(newName);
+                String newTuoi = editTextNewTuoi.getText().toString().trim();
+                if (!newTuoi.isEmpty()) {
+                    updateTuoiInFirebase(newTuoi);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Vui lòng nhập tên mới", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Vui lòng nhập tuổi mới", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
     }
-
-    private void updateUsernameInFirebase(String newName) {
+    private void updateTuoiInFirebase(String newTuoi) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userId = user.getUid();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(userId);
-        ref.child("username").setValue(newName)
+        ref.child("tuoi").setValue(newTuoi)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Đã cập nhật tên thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Đã cập nhật tuổi thành công", Toast.LENGTH_SHORT).show();
                         loadInfoForm();
                     }
                 })
@@ -74,7 +74,7 @@ public class changename extends AppCompatActivity {
                 });
     }
     private void loadInfoForm() {
-        Intent intent = new Intent(changename.this, info.class);
+        Intent intent = new Intent(changetuoi.this, info.class);
         startActivityForResult(intent, INFO_ACTIVITY_REQUEST_CODE);
     }
     @Override
@@ -94,4 +94,5 @@ public class changename extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

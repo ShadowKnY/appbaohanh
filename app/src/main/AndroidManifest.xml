@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,10 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name="info.changetuoi"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".login.lich_loginform"
             android:exported="true">
             <intent-filter>
@@ -25,34 +29,33 @@
         </activity>
         <activity
             android:name=".SplashScreen"
-            android:exported="true"/>
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-        <activity android:name=".Activity.MainActivity"></activity>
+            android:exported="true" /> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity android:name=".Activity.MainActivity" />
         <activity
             android:name="info.info"
-            android:exported="false">
-        </activity>
-        <activity android:name="info.changephone"
             android:exported="false"></activity>
-        <activity android:name="info.changename"
-            android:exported="true"></activity>
+        <activity
+            android:name="info.changephone"
+            android:exported="false" />
+        <activity
+            android:name="info.changename"
+            android:exported="true" />
         <activity
             android:name=".add_edit_delete.addActivity"
             android:exported="true" />
         <activity
             android:name=".Display.IpadDisplay"
             android:exported="true" />
-        <activity android:name=".login.lich_registerform"
-            android:exported="true"/>
-        <activity android:name=".login.ForgotActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".login.lich_registerform"
+            android:exported="true" />
+        <activity
+            android:name=".login.ForgotActivity"
+            android:exported="true" />
     </application>
-
-
 
 </manifest>

@@ -53,6 +53,13 @@ public class info extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        textViewTuoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(info.this, changetuoi.class);
+                startActivity(intent);
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
