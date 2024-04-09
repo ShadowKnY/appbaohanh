@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.login.lich_loginform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -60,6 +61,13 @@ public class info extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        textViewGt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(info.this, changegt.class);
+                startActivity(intent);
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,4 +114,15 @@ public class info extends AppCompatActivity {
 
 
     }
+    public void logoutClick(View view) {
+        logout();
+    }
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        // Điều hướng đến màn hình đăng nhập hoặc màn hình khác tùy theo thiết kế của ứng dụng của bạn.
+         Intent intent = new Intent(info.this, lich_loginform.class);
+                 startActivity(intent);
+                 finish();
+    }
+
 }

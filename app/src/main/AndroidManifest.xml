@@ -15,9 +15,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name="info.changetuoi"
+            android:name="info.changegt"
             android:exported="false">
         </activity>
+        <activity
+            android:name="info.changetuoi"
+            android:exported="false"></activity>
         <activity
             android:name=".login.lich_loginform"
             android:exported="true">
@@ -37,7 +40,7 @@
         <activity android:name=".Activity.MainActivity" />
         <activity
             android:name="info.info"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name="info.changephone"
             android:exported="false" />
