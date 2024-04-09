@@ -34,6 +34,14 @@
 <!--        </activity>-->
         <activity android:name=".Activity.MainActivity"></activity>
         <activity
+            android:name="info.info"
+            android:exported="false">
+        </activity>
+        <activity android:name="info.changephone"
+            android:exported="false"></activity>
+        <activity android:name="info.changename"
+            android:exported="true"></activity>
+        <activity
             android:name=".add_edit_delete.addActivity"
             android:exported="true" />
         <activity

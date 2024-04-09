@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import info.infouser;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
@@ -24,7 +24,6 @@ public class info extends AppCompatActivity {
     private TextView textViewTuoi;
     private TextView textViewGt;
     private TextView textViewDate;
-    private TextView textViewNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class info extends AppCompatActivity {
         textViewTuoi = findViewById(R.id.textViewTuoi);
         textViewGt = findViewById(R.id.textViewGt);
         textViewDate = findViewById(R.id.textViewDate);
-        textViewNew = findViewById(R.id.textViewNew);
 
         textViewUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,39 +62,40 @@ public class info extends AppCompatActivity {
             }
         });
 
-        // Kết nối đến Firebase
-//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        String userId = user.getUid();
-//
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-//        ref.child(userId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//                    String username = dataSnapshot.child("username").getValue(String.class);
-//                    String phone = dataSnapshot.child("phone").getValue(String.class);
-//                    String tuoi = dataSnapshot.child("tuoi").getValue(String.class);
-//                    String gt = dataSnapshot.child("gioitinh").getValue(String.class);
-//                    String date = dataSnapshot.child("ngaysinh").getValue(String.class);
-//                    String newInfo = dataSnapshot.child("newInfo").getValue(String.class);
-//
-//                    // Đẩy dữ liệu vào TextView tương ứng
-//                    textViewUsername.setText(username);
-//                    textViewPhone.setText(phone);
-//                    textViewTuoi.setText(tuoi);
-//                    textViewGt.setText(gt);
-//                    textViewDate.setText(date);
-//                    textViewNew.setText(newInfo);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Xử lý khi có lỗi xảy ra trong quá trình lấy dữ liệu từ Firebase
-//            }
-//        });
+         //Kết nối đến Firebase
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String userId = user.getUid();
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        ref.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    // Tạo người dùng mới với id là userId
+                    infouser newUser = new infouser("Username", "Phone", "Tuoi", "GioiTinh", "NgaySinh");
+                    ref.child(userId).setValue(newUser);
+                } else {
+                    String username = dataSnapshot.child("username").getValue(String.class);
+                    String phone = dataSnapshot.child("phone").getValue(String.class);
+                    String tuoi = dataSnapshot.child("tuoi").getValue(String.class);
+                    String gt = dataSnapshot.child("gioiTinh").getValue(String.class);
+                    String date = dataSnapshot.child("ngaySinh").getValue(String.class);
+
+                    // Đẩy dữ liệu vào TextView tương ứng
+                    textViewUsername.setText(username);
+                    textViewPhone.setText(phone);
+                    textViewTuoi.setText(tuoi);
+                    textViewGt.setText(gt);
+                    textViewDate.setText(date);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xử lý khi có lỗi xảy ra
+            }
+        });
 
 
     }
