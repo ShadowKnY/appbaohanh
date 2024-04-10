@@ -27,6 +27,7 @@ public class ForgotActivity extends AppCompatActivity {
 
         editTextEmailOrPhone = findViewById(R.id.emailOrPhone);
         sendOTPButton = findViewById(R.id.sendOTPButton);
+        editTextOTP = findViewById(R.id.otpCode);
         verifyOTPButton = findViewById(R.id.verifyOTPButton);
         textView = findViewById(R.id.LoginNow);
         signupText = findViewById(R.id.signupText);
