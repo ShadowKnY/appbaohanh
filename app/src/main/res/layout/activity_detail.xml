@@ -124,16 +124,16 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="4.0" />
 
                 <TextView
                     android:id="@+id/textView38"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:textColor="@color/black"
-                    android:text="Rating" />
+                    android:text="Điểm đánh giá" />
 
                 <ImageView
                     android:id="@+id/imageView20"
@@ -148,23 +148,23 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="10" />
 
                 <TextView
                     android:id="@+id/textView40"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="3dp"
                     android:textColor="@color/black"
-                    android:text="Review" />
+                    android:text="Bình luận" />
 
                 <TextView
                     android:id="@+id/textView34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:text="Số lượng:" />
 
                 <TextView

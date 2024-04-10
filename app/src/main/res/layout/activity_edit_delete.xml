@@ -74,7 +74,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:inputType="textMultiLine|textCapSentences"
-            android:hint="Số lượt đánh giá" />
+            android:hint="Lượt bình luân" />
 
         <EditText
             android:id="@+id/score_txt"
@@ -96,7 +96,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:inputType="textMultiLine|textCapSentences"
-            android:hint="Number In Chart" />
+            android:hint="Số lượng tồn kho" />
 
         <Button
             android:id="@+id/saveBtn"

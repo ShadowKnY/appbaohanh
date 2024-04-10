@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Explorer"
+                        android:text="Trang chủ"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -121,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Cart"
+                        android:text="Giỏ hàng"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -144,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Profile"
+                        android:text="Thông tin"
                         android:textAlignment="center" />
                 </LinearLayout>
             </LinearLayout>

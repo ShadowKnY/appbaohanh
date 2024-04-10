@@ -183,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Iphone"
+                        android:text="iPhone"
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -228,7 +228,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Ipad"
+                        android:text="iPad"
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -353,7 +353,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Explorer"
+                        android:text="Trang chủ"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -375,7 +375,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="WishList"
+                        android:text="Bỏ mẹ nó đi"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -421,7 +421,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Cart"
+                        android:text="Giỏ hàng"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -444,7 +444,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Profile"
+                        android:text="Thông tin"
                         android:textAlignment="center" />
                 </LinearLayout>
             </LinearLayout>
