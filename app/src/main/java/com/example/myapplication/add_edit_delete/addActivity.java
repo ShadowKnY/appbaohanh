@@ -24,9 +24,6 @@ public class addActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        // Khởi tạo DatabaseReference
-        databaseRef = FirebaseDatabase.getInstance().getReference("products");
-
         // Ánh xạ các view
         title = findViewById(R.id.title_txt);
         description = findViewById(R.id.description_txt);
@@ -70,7 +67,7 @@ public class addActivity extends AppCompatActivity {
     private void addProductToFirebase(String title, String picUrl, int review, double score, int numberInChart, double price, String description) {
         // Thêm sản phẩm vào cơ sở dữ liệu Firebase
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-        String productId = databaseRef.push().getKey(); // Tạo một ID mới cho sản phẩm
+        String productId = category + "_" +title; // Tạo một ID mới cho sản phẩm, cùng tên vs title
         PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
         databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

@@ -80,6 +80,7 @@ public class IpadDisplay extends AppCompatActivity {
                 }
             }
         }
+
     }
 
 
@@ -135,6 +136,4 @@ public class IpadDisplay extends AppCompatActivity {
             }
         });
     }
-
 }
-

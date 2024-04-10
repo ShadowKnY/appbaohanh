@@ -55,6 +55,4 @@ public class PopularDomain {
     public void setDecription(String decription) {
         this.decription = decription;
     }
-
-
 }
