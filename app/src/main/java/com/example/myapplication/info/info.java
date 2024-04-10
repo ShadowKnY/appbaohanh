@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.login.change_password;
 import com.example.myapplication.login.lich_loginform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +38,7 @@ public class info extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Button backButton = findViewById(R.id.back_button);
+        Button dmkButoon = findViewById(R.id.dmk_button);
 
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewPhone = findViewById(R.id.textViewPhone);
@@ -88,6 +90,14 @@ public class info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        dmkButoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(info.this, change_password.class);
                 startActivity(intent);
                 finish();
             }

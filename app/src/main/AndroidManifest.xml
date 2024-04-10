@@ -23,9 +23,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SplashScreen"
-            android:exported="true"/>
+        <activity android:name=".info.info"
+            android:exported="false">
+        </activity>
+        <activity android:name=".info.changename"
+            android:exported="false">
+        </activity>
+        <activity android:name=".info.changegt"
+            android:exported="false">
+        </activity>
+        <activity android:name=".info.changephone"
+            android:exported="false">
+        </activity>
+        <activity android:name=".info.changetuoi"
+            android:exported="false">
+        </activity>
+<!--        <activity-->
+<!--            android:name=".SplashScreen"-->
+<!--            android:exported="true"/>-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

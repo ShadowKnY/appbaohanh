@@ -14,6 +14,7 @@ import com.example.myapplication.Display.IpadDisplay;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.domain.PopularDomain;
+import com.example.myapplication.info.info;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         //khai báo các biến
         ImageView im_iph, im_mac, im_ip, im_watch,im_more;
         LinearLayout menu_cart;
+
+        LinearLayout layoutinfo = findViewById(R.id.layout4);
 
         //gán id các view của mainActivity vào biến đã tạo
         im_iph = findViewById(R.id.dis_ip);
@@ -52,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
                 //chấm dứt MainActivity
                 finish();
+            }
+        });
+        layoutinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, info.class);
+                startActivity(intent);
             }
         });
 
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
