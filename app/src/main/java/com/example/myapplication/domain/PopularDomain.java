@@ -9,7 +9,7 @@ public class PopularDomain {
     private int numberInChart;
 
     private double price;
-    private  String decription;
+    private String decription;
 
     public PopularDomain() {
     }

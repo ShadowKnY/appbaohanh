@@ -12,6 +12,8 @@ import com.example.myapplication.domain.PopularDomain;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 public class addActivity extends AppCompatActivity {
 
     private EditText title, description, price, picUrl, review, score, numberIC;
@@ -52,32 +54,45 @@ public class addActivity extends AppCompatActivity {
                 // Hiển thị thông báo lỗi nếu có trường nào đó bị trống
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
-                // Parse dữ liệu nhập vào từ các EditText sang các kiểu tương ứng
-                int review = Integer.parseInt(reviewStr);
-                double score = Double.parseDouble(scoreStr);
-                int numberInChart = Integer.parseInt(numberICStr);
-                double price = Double.parseDouble(priceStr);
-
                 // Thêm sản phẩm vào cơ sở dữ liệu Firebase
-                addProductToFirebase(titleStr, picUrlStr, review, score, numberInChart, price, descriptionStr);
+                addProductToFirebase(titleStr, picUrlStr, reviewStr, scoreStr, numberICStr, priceStr, descriptionStr);
             }
         });
     }
 
-    private void addProductToFirebase(String title, String picUrl, int review, double score, int numberInChart, double price, String description) {
-        // Thêm sản phẩm vào cơ sở dữ liệu Firebase
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-        String productId = category + "_" +title; // Tạo một ID mới cho sản phẩm, cùng tên vs title
-        PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
-        databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Hiển thị thông báo khi sản phẩm được thêm thành công
-                Toast.makeText(this, "Sản phẩm đã được thêm vào " + category, Toast.LENGTH_SHORT).show();
-                finish(); // Đóng activity sau khi thêm sản phẩm thành công
-            } else {
-                // Hiển thị thông báo khi có lỗi xảy ra khi thêm sản phẩm
-                Toast.makeText(this, "Đã xảy ra lỗi. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void addProductToFirebase(String title, String picUrl, String reviewStr, String scoreStr, String numberICStr, String priceStr, String description) {
+        // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+        if (title.isEmpty() || picUrl.isEmpty() || reviewStr.isEmpty() || scoreStr.isEmpty() || numberICStr.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
+            // Hiển thị thông báo lỗi nếu có trường nào đó bị trống
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return; // Trở về ngay sau khi gặp lỗi
+        }
+
+        try {
+            // Parse dữ liệu nhập vào từ các EditText sang các kiểu tương ứng
+            int review = Integer.parseInt(reviewStr);
+            double score = Double.parseDouble(scoreStr);
+            int numberInChart = Integer.parseInt(numberICStr);
+            double price = Double.parseDouble(priceStr);
+
+            // Thêm sản phẩm vào cơ sở dữ liệu Firebase
+            DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
+            String productId = UUID.randomUUID().toString(); // Tạo một ID mới cho sản phẩm, cùng tên với title
+            PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
+            databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // Hiển thị thông báo khi sản phẩm được thêm thành công
+                    Toast.makeText(this, "Sản phẩm đã được thêm vào " + category, Toast.LENGTH_SHORT).show();
+                    finish(); // Đóng activity sau khi thêm sản phẩm thành công
+                } else {
+                    // Hiển thị thông báo khi có lỗi xảy ra khi thêm sản phẩm
+                    Toast.makeText(this, "Đã xảy ra lỗi. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (NumberFormatException e) {
+            // Xử lý ngoại lệ khi chuyển đổi dữ liệu không thành công
+            e.printStackTrace();
+            Toast.makeText(this, "Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -20,13 +20,14 @@ public class DetailActivity extends AppCompatActivity {
     ImageView itemPic;
     Button editBtn;
     DatabaseReference mDatabase;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        String category = getIntent().getStringExtra("category");
+        category = getIntent().getStringExtra("category");
 
         editBtn = findViewById(R.id.editBtn);
         numberInChartTxt = findViewById(R.id.numberInChartDetail);
@@ -59,9 +60,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, editDeleteActivity.class);
-
-                intent.putExtra("productId", getIntent().getStringExtra("productId"));
-                intent.putExtra("category", getIntent().getStringExtra("category"));
+                intent.putExtra("category", category);
 
                 intent.putExtra("title", titleTxt.getText().toString());
                 intent.putExtra("price", priceTxt.getText().toString());
