@@ -7,11 +7,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.editDeleteActivity;
+import com.example.myapplication.domain.PopularDomain;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
@@ -20,7 +26,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView itemPic;
     Button editBtn;
     DatabaseReference mDatabase;
-    String category;
+    String category, productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         category = getIntent().getStringExtra("category");
+        productId = getIntent().getStringExtra("productId");
 
         editBtn = findViewById(R.id.editBtn);
         numberInChartTxt = findViewById(R.id.numberInChartDetail);

@@ -1,6 +1,7 @@
 package com.example.myapplication.add_edit_delete;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ public class editDeleteActivity extends AppCompatActivity {
     private EditText titleTxt, descriptionTxt, priceTxt, picUrlTxt, reviewTxt, scoreTxt, numberInChartTxt;
     private Button saveBtn, deleteBtn;
     private DatabaseReference databaseRef;
-    private String category, productId;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +44,6 @@ public class editDeleteActivity extends AppCompatActivity {
         // Lấy thông tin sản phẩm từ Intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-//            productId = getIntent().getStringExtra("productId");
-//            category = getIntent().getStringExtra("category");
-//
-//            if (productId == null || category == null) {
-//                Log.e("EditDeleteActivity", "ProductId or category is null");
-//                // Xử lý một cách phù hợp khi có lỗi xảy ra
-//            } else {
-//                Log.e("EditDeleteActivity", "Intent extras is null");
-//                // Xử lý một cách phù hợp khi có lỗi xảy ra
-//            }
             category = getIntent().getStringExtra("category");
 
             // Hiển thị thông tin sản phẩm trong EditText
@@ -91,7 +82,7 @@ public class editDeleteActivity extends AppCompatActivity {
                     int numberInChart = Integer.parseInt(numberInChartStr);
                     double price = Double.parseDouble(priceStr);
 
-                    editProductInDataBase(category, productId, title, picUrl, review, score, numberInChart, price, description);
+                    editProductInDataBase(category, title, picUrl, review, score, numberInChart, price, description);
                 }
             }
         });
@@ -109,9 +100,10 @@ public class editDeleteActivity extends AppCompatActivity {
         });
     }
 
-    private void editProductInDataBase(String category, String productId, String title, String picUrl, int review, double score, int numberInChart, double price, String description) {
+    private void editProductInDataBase(String category, String title, String picUrl, int review, double score, int numberInChart, double price, String description) {
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-        PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
+        String productId = databaseRef.push().getKey(); // Tạo một Id duy nhất cho sản phẩm mới
+        PopularDomain product = new PopularDomain(productId, title, picUrl, review, score, numberInChart, price, description);
         databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(editDeleteActivity.this, "Sản phẩm đã được cập nhật", Toast.LENGTH_SHORT).show();
@@ -122,10 +114,12 @@ public class editDeleteActivity extends AppCompatActivity {
         });
     }
 
+
+
     // Phương thức xóa sản phẩm khỏi cơ sở dữ liệu Firebase
     private void deleteProductFromFirebase() {
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-        databaseRef.child(productId).removeValue().addOnCompleteListener(task -> {
+        databaseRef.removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(editDeleteActivity.this, "Sản phẩm đã được xóa", Toast.LENGTH_SHORT).show();
                 finish(); // Kết thúc activity sau khi xóa sản phẩm thành công
@@ -134,54 +128,4 @@ public class editDeleteActivity extends AppCompatActivity {
             }
         });
     }
-
 }
-
-
-
-//    // Phương thức để lưu các thay đổi của sản phẩm vào Firebase
-//    private void saveProductChanges() {
-//        // Lấy các giá trị từ các EditText
-//        String titleStr = titleTxt.getText().toString().trim();
-//        String picUrlStr = picUrlTxt.getText().toString().trim();
-//        String reviewStr = reviewTxt.getText().toString().trim();
-//        String scoreStr = scoreTxt.getText().toString().trim();
-//        String numberICStr = numberInChartTxt.getText().toString().trim();
-//        String priceStr = priceTxt.getText().toString().trim();
-//        String descriptionStr = descriptionTxt.getText().toString().trim();
-//
-//        // Tạo đối tượng PopularDomain mới với các giá trị mới
-//        PopularDomain updateProduct = new PopularDomain(titleStr, picUrlStr, Integer.parseInt(reviewStr), Double.parseDouble(scoreStr),
-//                Integer.parseInt(numberICStr), Double.parseDouble(priceStr), descriptionStr);
-//
-//        // Cập nhật sản phẩm vào database
-//        if (category != null && productId != null) {
-//            databaseRef.child(category).child(productId).setValue(updateProduct)
-//                    .addOnSuccessListener(aVoid -> {
-//                        Toast.makeText(editDeleteActivity.this, "Thông tin sản phẩm đã được cập nhật thành công", Toast.LENGTH_SHORT).show();
-//                        finish(); // Kết thúc hoạt động sau khi cập nhật thành công
-//                    })
-//                    .addOnFailureListener(e -> Toast.makeText(editDeleteActivity.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-//        } else {
-//            Log.e("editDeleteActivity", "Category or productId is null");
-//        }
-//    }
-//
-//
-//    // Phương thức để xóa sản phẩm khỏi Firebase Realtime Database
-//    private void deleteProduct() {
-//        if (category != null && productId != null) {
-//            // Xóa sản phẩm khỏi Firebase Realtime Database
-//            databaseRef.child(category).child(productId).removeValue()
-//                    .addOnSuccessListener(aVoid -> {
-//                        Toast.makeText(editDeleteActivity.this, "Sản phẩm đã được xóa thành công", Toast.LENGTH_SHORT).show();
-//                        finish(); // Kết thúc hoạt động sau khi xóa thành công
-//                    })
-//                    .addOnFailureListener(e -> Toast.makeText(editDeleteActivity.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-//        } else {
-//            Log.e("editDeleteActivity", "Category or productId is null");
-//            // Xử lý một cách phù hợp khi có lỗi xảy ra
-//        }
-//    }
-
-

@@ -8,13 +8,15 @@ public class PopularDomain {
     private double score;
     private int numberInChart;
 
+    private String productId;
     private double price;
     private String decription;
 
     public PopularDomain() {
     }
 
-    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {
+    public PopularDomain(String productId, String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {
+        this.productId = productId;
         this.title = title;
         this.picUrl = picUrl;
         this.review = review;
@@ -22,6 +24,14 @@ public class PopularDomain {
         this.numberInChart = numberInChart;
         this.price = price;
         this.decription = decription;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getTitle() {

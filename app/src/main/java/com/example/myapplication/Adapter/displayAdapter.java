@@ -62,6 +62,7 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("itemPic",product.getPicUrl());
                 intent.putExtra("titleDetail",product.getTitle());
@@ -69,6 +70,7 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
                 intent.putExtra("ratingDetail",product.getScore());
                 intent.putExtra("reviewDetail",product.getReview());
                 intent.putExtra("descriptionDetail",product.getDecription());
+                intent.putExtra("numberInChartDetail", product.getNumberInChart());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

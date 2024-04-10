@@ -62,6 +62,6 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.activity:activity:1.8.0")
-
+    implementation("com.github.clans:fab:1.6.4")
 
 }

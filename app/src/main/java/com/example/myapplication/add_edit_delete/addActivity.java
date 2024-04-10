@@ -1,5 +1,6 @@
 package com.example.myapplication.add_edit_delete;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.Display.DetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.domain.PopularDomain;
 import com.google.firebase.database.DatabaseReference;
@@ -77,8 +79,8 @@ public class addActivity extends AppCompatActivity {
 
             // Thêm sản phẩm vào cơ sở dữ liệu Firebase
             DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-            String productId = UUID.randomUUID().toString(); // Tạo một ID mới cho sản phẩm, cùng tên với title
-            PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
+            String productId = databaseRef.getKey(); // Tạo một ID mới cho sản phẩm
+            PopularDomain product = new PopularDomain(productId,title, picUrl, review, score, numberInChart, price, description);
             databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // Hiển thị thông báo khi sản phẩm được thêm thành công
