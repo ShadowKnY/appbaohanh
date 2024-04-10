@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +25,7 @@ public class editDeleteActivity extends AppCompatActivity {
 
     private EditText titleTxt, descriptionTxt, priceTxt, picUrlTxt, reviewTxt, scoreTxt, numberInChartTxt;
     private Button saveBtn, deleteBtn;
+    private ImageView backBtn;
     private DatabaseReference databaseRef;
     private String category;
     private String title; // Changed from productId to title
@@ -43,6 +45,14 @@ public class editDeleteActivity extends AppCompatActivity {
         numberInChartTxt = findViewById(R.id.numberInChart_txt);
         saveBtn = findViewById(R.id.saveBtn);
         deleteBtn = findViewById(R.id.deleteBtn);
+        backBtn = findViewById(R.id.backBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // Khởi tạo DatabaseReference
         databaseRef = FirebaseDatabase.getInstance().getReference().child("Product");

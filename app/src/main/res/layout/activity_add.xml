@@ -9,6 +9,13 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/arrow" />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
@@ -17,7 +24,7 @@
             android:textStyle="bold"
             android:textColor="@color/purple_Dark"
             android:textSize="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:text="THÊM SẢN PHẨM MỚI"/>
 
 

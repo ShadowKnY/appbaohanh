@@ -2,8 +2,10 @@ package com.example.myapplication.add_edit_delete;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class addActivity extends AppCompatActivity {
 
     private EditText title, description, price, picUrl, review, score, numberIC;
     private Button add_btn;
+    private ImageView back_btn;
     private DatabaseReference databaseRef;
     private String category;
 
@@ -37,6 +40,7 @@ public class addActivity extends AppCompatActivity {
         score = findViewById(R.id.score_txt);
         numberIC = findViewById(R.id.numberInChart_txt);
         add_btn = findViewById(R.id.add_btn);
+        back_btn = findViewById(R.id.backBtn);
 
         // Lấy loại sản phẩm từ intent hoặc từ biến truyền vào
         category = getIntent().getStringExtra("category");
@@ -58,6 +62,13 @@ public class addActivity extends AppCompatActivity {
             } else {
                 // Thêm sản phẩm vào cơ sở dữ liệu Firebase
                 addProductToFirebase(titleStr, picUrlStr, reviewStr, scoreStr, numberICStr, priceStr, descriptionStr);
+            }
+        });
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

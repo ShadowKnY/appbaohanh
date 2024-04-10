@@ -3,6 +3,7 @@ package com.example.myapplication.Display;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class IpadDisplay extends AppCompatActivity {
     private RecyclerView rcvProduct;
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
+    private ImageView backBtn;
     String category;
     FloatingActionButton addBtn;
     @Override
@@ -43,7 +45,7 @@ public class IpadDisplay extends AppCompatActivity {
         menu_cart = findViewById(R.id.menu_cart);
         menu_in4 = findViewById(R.id.menu_in4);
         addBtn = findViewById(R.id.addCircle);
-
+        backBtn = findViewById(R.id.backBtn);
         menu_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +66,13 @@ public class IpadDisplay extends AppCompatActivity {
                 Intent i = new Intent(IpadDisplay.this, addActivity.class);
                 i.putExtra("category", category);
                 startActivity(i);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
