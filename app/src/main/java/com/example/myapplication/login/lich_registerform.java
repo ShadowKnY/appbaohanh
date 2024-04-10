@@ -23,7 +23,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public class lich_registerform extends AppCompatActivity {
 
         EditText editTextUsername;
-        EditText editTextPassword;
+        EditText editTextPassword, retypePassWord;
         EditText textEmail;
         Button registerButton;
         FirebaseAuth mAuth;
@@ -39,6 +39,7 @@ public class lich_registerform extends AppCompatActivity {
 
             editTextUsername = findViewById(R.id.username);
             editTextPassword = findViewById(R.id.password);
+            retypePassWord = findViewById(R.id.retypepassword);
             textEmail = findViewById(R.id.email);
             registerButton = findViewById(R.id.registerButton);
             mAuth = FirebaseAuth.getInstance();
@@ -72,6 +73,10 @@ public class lich_registerform extends AppCompatActivity {
                         Toast.makeText(lich_registerform.this, "Enter Password", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if (!password.equals(retypePassWord.getText().toString())) {
+                        Toast.makeText(lich_registerform.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -94,5 +99,17 @@ public class lich_registerform extends AppCompatActivity {
 
                 }
             });
+
+            forgotButton =findViewById(R.id.forgotButton);
+            forgotButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(lich_registerform.this, ForgotActivity.class);
+                    startActivity(i);
+                }
+
+
+            });
+
         }
     }

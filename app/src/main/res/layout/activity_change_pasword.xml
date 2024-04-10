@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/darkpurple"
-    tools:context=".login.lich_registerform">
+    tools:context=".login.change_password">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,39 +38,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:id="@+id/registerText"
+                android:text="Your Password"
+                android:id="@+id/passwordText"
                 android:textSize="36sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/purple_Dark"/>
-
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/login_form_1"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:hint="@string/username"
-                android:padding="8dp"
-                android:textColor="@color/purple"
-                android:textColorHighlight="@color/cardview_dark_background"/>
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/login_form_1"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:drawablePadding="8dp"
-                android:hint="@string/email"
-                android:padding="8dp"
-                android:inputType="text"
-                android:textColor="@color/purple"
-                android:textColorHighlight="@color/cardview_dark_background"/>
 
             <EditText
                 android:id="@+id/password"
@@ -85,6 +58,37 @@
                 android:inputType="textPassword"
                 android:textColor="@color/purple"
                 android:textColorHighlight="@color/cardview_dark_background"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/enterNewPassWordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter new password again"
+                android:textAlignment="center"
+                android:textColor="@color/purple_Dark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/newpassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/login_form_1"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/new_password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/purple"
+                android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
                 android:id="@+id/retypepassword"
@@ -103,8 +107,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/registerButton"
-                android:text="@string/register"
+                android:id="@+id/loginButton"
+                android:text="@string/change"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple_Dark"
@@ -113,31 +117,11 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-    
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/forgotButton"
-        android:layout_width="351dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/purple"
-        android:text="@string/forgot_password"
-        android:textSize="18sp"
-        app:cornerRadius="10dp" />
-
-    <TextView
-        android:id="@+id/LoginNow"
-        android:text="@string/click_here_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:textColor="@color/purple_Dark"
-        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>

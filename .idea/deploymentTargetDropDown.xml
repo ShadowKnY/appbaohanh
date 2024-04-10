@@ -18,7 +18,13 @@
           <timeTargetWasSelectedWithDropDown value="2024-04-07T17:05:46.937174800Z" />
         </State>
       </entry>
-      <entry key="info">
+      <entry key="chang_password">
+        <State />
+      </entry>
+      <entry key="change_password">
+        <State />
+      </entry>
+      <entry key="lich_loginform">
         <State />
       </entry>
     </value>
