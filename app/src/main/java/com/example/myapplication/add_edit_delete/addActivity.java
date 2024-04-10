@@ -79,8 +79,8 @@ public class addActivity extends AppCompatActivity {
 
             // Thêm sản phẩm vào cơ sở dữ liệu Firebase
             DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Product/" + category);
-            String productId = databaseRef.getKey(); // Tạo một ID mới cho sản phẩm
-            PopularDomain product = new PopularDomain(productId,title, picUrl, review, score, numberInChart, price, description);
+            String productId = title; // Tạo một ID mới cho sản phẩm
+            PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
             databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // Hiển thị thông báo khi sản phẩm được thêm thành công

@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.editDeleteActivity;
 import com.example.myapplication.domain.PopularDomain;
@@ -25,8 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView titleTxt, priceTxt, reviewTxt, ratingTxt, descriptionTxt, numberInChartTxt;
     ImageView itemPic;
     Button editBtn;
-    DatabaseReference mDatabase;
-    String category, productId;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         category = getIntent().getStringExtra("category");
-        productId = getIntent().getStringExtra("productId");
 
         editBtn = findViewById(R.id.editBtn);
         numberInChartTxt = findViewById(R.id.numberInChartDetail);
@@ -69,6 +67,8 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetailActivity.this, editDeleteActivity.class);
                 intent.putExtra("category", category);
 
+                // Đặt các thông tin sản phẩm vào Intent
+                intent.putExtra("category", category);
                 intent.putExtra("title", titleTxt.getText().toString());
                 intent.putExtra("price", priceTxt.getText().toString());
                 intent.putExtra("review", reviewTxt.getText().toString());
@@ -76,8 +76,11 @@ public class DetailActivity extends AppCompatActivity {
                 intent.putExtra("description", descriptionTxt.getText().toString());
                 intent.putExtra("numberInChart", numberInChartTxt.getText().toString());
                 intent.putExtra("picUrl", getIntent().getStringExtra("itemPic"));
+
+                // Chuyển sang activity tương ứng
                 startActivity(intent);
             }
         });
+
     }
 }
