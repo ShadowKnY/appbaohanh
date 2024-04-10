@@ -43,6 +43,8 @@
             android:exported="true"/>
         <activity android:name=".login.ForgotActivity"
             android:exported="true"/>
+        <activity android:name=".login.change_password"
+            android:exported="true"/>
     </application>
 
 
