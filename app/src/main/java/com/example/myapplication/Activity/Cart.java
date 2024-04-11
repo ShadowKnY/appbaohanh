@@ -1,5 +1,6 @@
 package com.example.myapplication.Activity;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class Cart extends AppCompatActivity {
         // Initialize Lottie animation view
         animationView = new LottieAnimationView(this);
         animationView.setAnimation(R.raw.faceid); // Replace with your Lottie animation file
-        animationView.loop(true);
+        animationView.setRepeatCount(ValueAnimator.INFINITE);
         animationView.playAnimation();
 
         // Get reference to "Order Now" button

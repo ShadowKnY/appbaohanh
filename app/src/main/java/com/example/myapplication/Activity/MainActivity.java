@@ -18,7 +18,7 @@ import com.example.myapplication.domain.PopularDomain;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-ActivityMainBinding binding;
+    ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

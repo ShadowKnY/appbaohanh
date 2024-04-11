@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DetailActivity">
+    tools:context=".Display.DetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/grey_background"
+                    android:background="@drawable/white_background"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +83,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/titleTxt"
-                    android:singleLine="true"
+                    android:id="@+id/titleDetail"
+                    android:singleLine="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -95,7 +95,7 @@
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:id="@+id/priceTxt"
+                    android:id="@+id/priceDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -119,21 +119,21 @@
                     android:src="@drawable/star" />
 
                 <TextView
-                    android:id="@+id/ratingTxt"
+                    android:id="@+id/ratingDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="4.0" />
 
                 <TextView
                     android:id="@+id/textView38"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:textColor="@color/black"
-                    android:text="Rating" />
+                    android:text="Điểm đánh giá" />
 
                 <ImageView
                     android:id="@+id/imageView20"
@@ -143,21 +143,37 @@
                     android:src="@drawable/review" />
 
                 <TextView
-                    android:id="@+id/reviewTxt"
+                    android:id="@+id/reviewDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="10" />
 
                 <TextView
                     android:id="@+id/textView40"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="3dp"
                     android:textColor="@color/black"
-                    android:text="Review" />
+                    android:text="Bình luận" />
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="16dp"
+                    android:text="Số lượng:" />
+
+                <TextView
+                    android:id="@+id/numberInChartDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="0"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <View
@@ -169,7 +185,7 @@
                 android:background="@color/grey"/>
 
             <TextView
-                android:id="@+id/descriptionTxt"
+                android:id="@+id/descriptionDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -178,17 +194,40 @@
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buyBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-               android:layout_margin="16dp"
-                style="@android:style/Widget.Button"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:background="@drawable/btn_background"
-                android:text="Buy Now"
-                android:textSize="16sp"/>
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buyBtn"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        style="@android:style/Widget.Button"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@drawable/btn_background"
+                        android:text="Mua Ngay"
+                        android:textSize="16sp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/editBtn"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="16dp"
+                        style="@android:style/Widget.Button"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@drawable/btn_background"
+                        android:text="Sửa Thông Tin"
+                        android:textSize="16sp"/>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
