@@ -14,10 +14,15 @@ public class PopularDomain {
     private double price;
     private String decription;
     private String itemId;
+    private int quantity;
 
     private String category;
 
-    public PopularDomain() {
+
+    public  PopularDomain(String title,String picUrl,double price){
+        this.title= title;
+        this.picUrl = picUrl;
+        this.price = price;
     }
 
     public String getCategory() {
@@ -28,11 +33,11 @@ public class PopularDomain {
         this.category = category;
     }
 
-    public String getItemId() {
+    public String getitemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setitemId(String itemId) {
         this.itemId = itemId;
     }
 
@@ -43,10 +48,31 @@ public class PopularDomain {
         this.score = score;
         this.numberInChart = numberInChart;
         this.price = price;
-        this.decription = decription;
+    }
+    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription,String itemId) {
+        this.title = title;
+        this.picUrl = picUrl;
+        this.review = review;
+        this.score = score;
+        this.numberInChart = numberInChart;
+        this.price = price;
+        this.itemId = itemId;
     }
 
-    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription,String itemId, String category) {
+
+    public PopularDomain(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription, String itemId, String category) {
         this.title = title;
         this.picUrl = picUrl;
         this.review = review;
@@ -112,6 +138,17 @@ public class PopularDomain {
 
     public void setDecription(String decription) {
         this.decription = decription;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public PopularDomain() {
     }
 
     @Override

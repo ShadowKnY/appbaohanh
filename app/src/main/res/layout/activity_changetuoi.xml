@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".info.changetuoi">
+    tools:context=".info.changetuoi"
+    android:background="@drawable/darkpurple">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -23,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thay đổi tuổi"
+                android:textColor="@color/white"
                 android:textAppearance="?attr/titleTextAppearance"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -43,6 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:hint="Nhập tuổi mới"
+        android:background="@drawable/edittext_background"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

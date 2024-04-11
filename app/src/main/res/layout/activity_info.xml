@@ -20,18 +20,20 @@
             android:id="@+id/textViewUsernameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2_1"
             android:padding="16dp"
-            android:text="Tên đăng nhập" />
+            android:text="Tên đăng nhập"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/textViewUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2"
             android:padding="16dp"
             android:gravity="end"
+            android:textColor="@color/black"
             android:hint="Cập nhật ngay" />
 
     </LinearLayout>
@@ -46,8 +48,9 @@
             android:id="@+id/textViewPhoneLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2_1"
             android:padding="16dp"
+            android:textColor="@color/black"
             android:text="Số điện thoại" />
 
         <TextView
@@ -55,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2"
             android:padding="16dp"
             android:gravity="end"
             android:hint="Cập nhật ngay"/>
@@ -72,8 +75,9 @@
             android:id="@+id/textViewTuoiLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2_1"
             android:padding="16dp"
+            android:textColor="@color/black"
             android:text="Tuổi" />
 
         <TextView
@@ -81,9 +85,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2"
             android:padding="16dp"
             android:gravity="end"
+            android:textColor="@color/black"
             android:hint="Cập nhật ngay"/>
 
     </LinearLayout>
@@ -98,8 +103,9 @@
             android:id="@+id/textViewGtLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2_1"
             android:padding="16dp"
+            android:textColor="@color/black"
             android:text="Giới tính" />
 
         <TextView
@@ -107,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2"
             android:padding="16dp"
             android:gravity="end"
             android:hint="Cập nhật ngay"/>
@@ -124,8 +130,9 @@
             android:id="@+id/textViewDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2_1"
             android:padding="16dp"
+            android:textColor="@color/black"
             android:text="Ngày tháng năm sinh" />
 
         <TextView
@@ -133,7 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@drawable/white_background2"
             android:padding="16dp"
             android:gravity="end"
             android:hint="Cập nhật ngay"/>
