@@ -194,7 +194,7 @@ public class editDeleteActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(editDeleteActivity.this);
                 builder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này?")
                         .setPositiveButton("Có", (dialog, which) -> {
-                        // Thực hiện xóa sản phẩm khỏi cơ sở dữ liệu Firebase
+                            // Thực hiện xóa sản phẩm khỏi cơ sở dữ liệu Firebase
                             deleteProductFromFirebase();
 
 //                            deleteProductFromFirebase(category, title);

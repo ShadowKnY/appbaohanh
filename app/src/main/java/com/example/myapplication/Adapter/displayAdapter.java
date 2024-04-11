@@ -27,21 +27,13 @@ import java.util.List;
 
 public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductViewHolder> {
     private Context context;
-
-    //tạo biến chứa list các sản phẩm bao gồm các thuộc tính trong popularDomain
-    private List<PopularDomain> productList;
-
-    //khai báo biến thực hiện các thao tác đọc và ghi dữ liệu vào Firebase Realtime Database
+    private List<PopularDomain> productList = new ArrayList<>();
     private DatabaseReference mDatabase;
 
     public displayAdapter(List<PopularDomain> productList) {
 
         this.productList = productList;
-
-        //mDatabase sẽ trỏ đến nút "Product" trong Firebase Realtime Database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Product");
-
-        //lắng nghe sự kiện khi có 1 sản phẩm mới được add vào realtime qua đó app cx sẽ cập nhật
         loadDataFromFirebase();
     }
 
@@ -98,8 +90,6 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                // Xử lý sự kiện khi một child mới được thêm vào
                 PopularDomain product = dataSnapshot.getValue(PopularDomain.class);
                 productList.add(product);
                 notifyDataSetChanged();
