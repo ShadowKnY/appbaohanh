@@ -74,6 +74,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     holder.numberItemTxt.setText(String.valueOf(newQuantity));
                     holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
                     cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
+                    DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getItemId());
+                    itemRef.child("quantity").setValue(newQuantity);
                     holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi giảm số lượng sản phẩm
                     holder.updateDelivery();
                     holder.updateTax();
@@ -91,6 +93,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 holder.numberItemTxt.setText(String.valueOf(newQuantity));
                 holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
                 cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
+                DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getItemId());
+                itemRef.child("quantity").setValue(newQuantity);
                 holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi tăng số lượng sản phẩm
                 holder.updateDelivery();
                 holder.updateTax();
