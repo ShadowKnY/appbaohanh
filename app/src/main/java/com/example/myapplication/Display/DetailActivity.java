@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView itemPic;
     Button editBtn;
     String category;
+    PopularDomain productData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,31 @@ public class DetailActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         itemPic = findViewById(R.id.itemPic);
 
-        Picasso.get().load(getIntent().getStringExtra("itemPic"))
-                .placeholder(R.drawable.grey_background)
-                .into(itemPic);
-        titleTxt.setText(getIntent().getStringExtra("titleDetail"));
-        priceTxt.setText(String.valueOf(getIntent().getDoubleExtra("priceDetail", 0.0)));
-        reviewTxt.setText(String.valueOf(getIntent().getIntExtra("reviewDetail",0)));
-        ratingTxt.setText(String.valueOf(getIntent().getDoubleExtra("ratingDetail", 0.0)));
-        numberInChartTxt.setText(String.valueOf(getIntent().getIntExtra("numberInChartDetail", 0)));
-        descriptionTxt.setText(getIntent().getStringExtra("descriptionDetail"));
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String productString = bundle.getString("DataProduct");
+            Gson gson = new Gson();
+            productData = gson.fromJson(productString, PopularDomain.class);
+            Picasso.get().load(productData.getPicUrl())
+                    .placeholder(R.drawable.grey_background)
+                    .into(itemPic);
+            titleTxt.setText(productData.getTitle());
+            priceTxt.setText(String.valueOf(productData.getPrice()));
+            reviewTxt.setText(String.valueOf(productData.getReview()));
+            ratingTxt.setText(String.valueOf(productData.getScore()));
+            numberInChartTxt.setText(String.valueOf(productData.getNumberInChart()));
+            descriptionTxt.setText(productData.getDecription());
+            // Picasso.get().load(getIntent().getStringExtra("itemPic"))
+            //         .placeholder(R.drawable.grey_background)
+            //         .into(itemPic);
+            // titleTxt.setText(getIntent().getStringExtra("titleDetail"));
+            // priceTxt.setText(String.valueOf(getIntent().getDoubleExtra("priceDetail", 0.0)));
+            // reviewTxt.setText(String.valueOf(getIntent().getIntExtra("reviewDetail",0)));
+            // ratingTxt.setText(String.valueOf(getIntent().getDoubleExtra("ratingDetail", 0.0)));
+            // numberInChartTxt.setText(String.valueOf(getIntent().getIntExtra("numberInChartDetail", 0)));
+            // descriptionTxt.setText(getIntent().getStringExtra("descriptionDetail"));
+        }
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,17 +83,19 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, editDeleteActivity.class);
-                intent.putExtra("category", category);
+                intent.putExtra("DataProduct", productData.toString());
 
-                // Đặt các thông tin sản phẩm vào Intent
-                intent.putExtra("category", category);
-                intent.putExtra("title", titleTxt.getText().toString());
-                intent.putExtra("price", priceTxt.getText().toString());
-                intent.putExtra("review", reviewTxt.getText().toString());
-                intent.putExtra("score", ratingTxt.getText().toString());
-                intent.putExtra("description", descriptionTxt.getText().toString());
-                intent.putExtra("numberInChart", numberInChartTxt.getText().toString());
-                intent.putExtra("picUrl", getIntent().getStringExtra("itemPic"));
+//                intent.putExtra("category", category);
+//
+//                // Đặt các thông tin sản phẩm vào Intent
+//                intent.putExtra("category", category);
+//                intent.putExtra("title", titleTxt.getText().toString());
+//                intent.putExtra("price", priceTxt.getText().toString());
+//                intent.putExtra("review", reviewTxt.getText().toString());
+//                intent.putExtra("score", ratingTxt.getText().toString());
+//                intent.putExtra("description", descriptionTxt.getText().toString());
+//                intent.putExtra("numberInChart", numberInChartTxt.getText().toString());
+//                intent.putExtra("picUrl", getIntent().getStringExtra("itemPic"));
 
                 // Chuyển sang activity tương ứng
                 startActivity(intent);

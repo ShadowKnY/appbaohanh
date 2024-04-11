@@ -67,17 +67,19 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
                 if (product != null) {
                     Intent intent = new Intent(context, DetailActivity.class);
 
-                    intent.putExtra("category","iPhone");
-                    intent.putExtra("category","iPad");
-                    intent.putExtra("category","category");
-                    intent.putExtra("itemPic", product.getPicUrl());
-                    intent.putExtra("titleDetail", product.getTitle());
-                    intent.putExtra("priceDetail", product.getPrice());
-                    intent.putExtra("ratingDetail", product.getScore());
-                    intent.putExtra("reviewDetail", product.getReview());
-                    intent.putExtra("descriptionDetail", product.getDecription());
-                    intent.putExtra("numberInChartDetail", product.getNumberInChart());
+//                    intent.putExtra("category","iPhone");
+//                    intent.putExtra("category","iPad");
+//                    intent.putExtra("category","category");
+//                    intent.putExtra("itemPic", product.getPicUrl());
+//                    intent.putExtra("titleDetail", product.getTitle());
+//                    intent.putExtra("priceDetail", product.getPrice());
+//                    intent.putExtra("ratingDetail", product.getScore());
+//                    intent.putExtra("reviewDetail", product.getReview());
+//                    intent.putExtra("descriptionDetail", product.getDecription());
+//                    intent.putExtra("numberInChartDetail", product.getNumberInChart());
+
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("DataProduct", product.toString());
                     context.startActivity(intent);
                 }
             }

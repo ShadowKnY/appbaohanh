@@ -1,5 +1,9 @@
 package com.example.myapplication.domain;
 
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+
 public class PopularDomain {
 
     private String title;
@@ -9,11 +13,30 @@ public class PopularDomain {
     private int numberInChart;
     private double price;
     private String decription;
+    private String itemId;
+
+    private String category;
 
     public PopularDomain() {
     }
 
-    public PopularDomain( String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {
         this.title = title;
         this.picUrl = picUrl;
         this.review = review;
@@ -21,6 +44,18 @@ public class PopularDomain {
         this.numberInChart = numberInChart;
         this.price = price;
         this.decription = decription;
+    }
+
+    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription,String itemId, String category) {
+        this.title = title;
+        this.picUrl = picUrl;
+        this.review = review;
+        this.score = score;
+        this.numberInChart = numberInChart;
+        this.price = price;
+        this.decription = decription;
+        this.itemId = itemId;
+        this.category = category;
     }
 
     public String getTitle() {
@@ -77,5 +112,23 @@ public class PopularDomain {
 
     public void setDecription(String decription) {
         this.decription = decription;
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("picUrl", picUrl);
+        map.put("review", review);
+        map.put("score", score);
+        map.put("numberInChart", numberInChart);
+        map.put("price", price);
+        map.put("decription", decription);
+        return map;
     }
 }
