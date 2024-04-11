@@ -10,28 +10,31 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.example.myapplication.Activity.Cart;
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.editDeleteActivity;
 import com.example.myapplication.domain.PopularDomain;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Calendar;
 
 public class DetailActivity extends AppCompatActivity {
     ImageView backBtn;
     TextView titleTxt, priceTxt, reviewTxt, ratingTxt, descriptionTxt, numberInChartTxt;
-    ImageView itemPic;
+    ImageView itemPic,cartDetailBtn;
     Button editBtn;
     String category;
     PopularDomain productData;
+    AppCompatButton buyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTxt = findViewById(R.id.descriptionDetail);
         backBtn = findViewById(R.id.backBtn);
         itemPic = findViewById(R.id.itemPic);
+        buyBtn = findViewById(R.id.buyBtn);
+        cartDetailBtn = findViewById(R.id.cartDetailBtn);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -76,7 +81,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
 
-        addToCartBtn.setOnClickListener(new View.OnClickListener() {
+        buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addedToCart();
@@ -155,23 +160,21 @@ public class DetailActivity extends AppCompatActivity {
             // Tạo chuỗi ngày tháng để làm key cho sản phẩm trong giỏ hàng
             String cartItemId = year + "-" + month + "-" + day + "_" + hour + "-" + minute + "-" + second;
 
-            product.setItemId(cartItemId);
+            product.setitemId(cartItemId);
         // Thêm sản phẩm vào giỏ hàng trên Firebase Realtime Database
             DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("carts").child(userId);
             PopularDomain productAdd = new PopularDomain(product.getTitle(),product.getPicUrl(), product.getReview(),product.getScore(),product.getNumberInChart(), product.getPrice(), product.getDecription(),cartItemId);
             cartRef.child(cartItemId).setValue(product)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            // Xử lý thành công: Hiển thị thông báo hoặc cập nhật giao diện người dùng
+                        public void onSuccess(Void unused) {
                             Toast.makeText(DetailActivity.this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            // Xử lý lỗi: Hiển thị thông báo hoặc cập nhật giao diện người dùng với thông báo lỗi
-                           Toast.makeText(DetailActivity.this, "Lỗi: Không thể thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DetailActivity.this, "Lỗi: Không thể thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

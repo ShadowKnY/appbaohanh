@@ -68,13 +68,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 int newQuantity = currentQuantity - 1;
                 if (newQuantity <= 0) {
                     // Hiển thị hộp thoại xác nhận xóa sản phẩm khi số lượng giảm về 0
-                    holder.showRemoveItemDialog(cartItem.getItemId()); // Chuyển itemId vào hàm
+                    holder.showRemoveItemDialog(cartItem.getitemId()); // Chuyển itemId vào hàm
                 } else {
                     // Giảm số lượng sản phẩm đi một đơn vị
                     holder.numberItemTxt.setText(String.valueOf(newQuantity));
                     holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
                     cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
-                    DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getItemId());
+                    DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getitemId());
                     itemRef.child("quantity").setValue(newQuantity);
                     holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi giảm số lượng sản phẩm
                     holder.updateDelivery();
@@ -93,7 +93,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 holder.numberItemTxt.setText(String.valueOf(newQuantity));
                 holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
                 cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
-                DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getItemId());
+                DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getitemId());
                 itemRef.child("quantity").setValue(newQuantity);
                 holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi tăng số lượng sản phẩm
                 holder.updateDelivery();
@@ -155,7 +155,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                     DatabaseReference itemRef = FirebaseDatabase.getInstance()
                                             .getReference("carts")
                                             .child(userId) // userId là ID của người dùng hiện tại
-                                            .child(cartItem.getItemId()); // Sử dụng itemId để xóa mục
+                                            .child(cartItem.getitemId()); // Sử dụng itemId để xóa mục
                                     itemRef.removeValue();
                                     // Xóa mục khỏi danh sách cartItems và cập nhật giao diện
                                     int position = getAbsoluteAdapterPosition();

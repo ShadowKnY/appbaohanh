@@ -14,6 +14,7 @@ public class PopularDomain {
     private double price;
     private String decription;
     private String itemId;
+    private int quantity;
 
     private String category;
 
@@ -63,7 +64,15 @@ public class PopularDomain {
         this.quantity = quantity;
     }
 
-    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription,String itemId, String category) {
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription, String itemId, String category) {
         this.title = title;
         this.picUrl = picUrl;
         this.review = review;
