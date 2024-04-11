@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductViewHolder> {
@@ -70,16 +71,25 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PopularDomain product = productList.get(holder.getAdapterPosition());
+                if (product != null) {
+                    Intent intent = new Intent(context, DetailActivity.class);
 
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("itemPic",product.getPicUrl());
-                intent.putExtra("titleDetail",product.getTitle());
-                intent.putExtra("priceDetail",product.getPrice());
-                intent.putExtra("ratingDetail",product.getScore());
-                intent.putExtra("reviewDetail",product.getReview());
-                intent.putExtra("descriptionDetail",product.getDecription());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+//                    intent.putExtra("category","iPhone");
+//                    intent.putExtra("category","iPad");
+//                    intent.putExtra("category","category");
+//                    intent.putExtra("itemPic", product.getPicUrl());
+//                    intent.putExtra("titleDetail", product.getTitle());
+//                    intent.putExtra("priceDetail", product.getPrice());
+//                    intent.putExtra("ratingDetail", product.getScore());
+//                    intent.putExtra("reviewDetail", product.getReview());
+//                    intent.putExtra("descriptionDetail", product.getDecription());
+//                    intent.putExtra("numberInChartDetail", product.getNumberInChart());
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("DataProduct", product.toString());
+                    context.startActivity(intent);
+                }
             }
         });
     }

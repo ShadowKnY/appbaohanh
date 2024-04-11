@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome"
+        android:text="Chào mừng"
         android:id="@+id/WelcomeText"
         android:textSize="36sp"
         android:textAlignment="center"
@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
+                android:text="Đăng Ký"
                 android:id="@+id/registerText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -53,7 +53,7 @@
                 android:background="@drawable/login_form_1"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="@string/username"
+                android:hint="Tên người dùng"
                 android:padding="8dp"
                 android:textColor="@color/purple"
                 android:textColorHighlight="@color/cardview_dark_background"/>
@@ -80,7 +80,7 @@
                 android:background="@drawable/login_form_1"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="@string/password"
+                android:hint="Mật khẩu"
                 android:padding="8dp"
                 android:inputType="textPassword"
                 android:textColor="@color/purple"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/registerButton"
-                android:text="@string/register"
+                android:text="Đăng ký"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple_Dark"
@@ -111,13 +111,13 @@
         android:layout_width="351dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/purple"
-        android:text="@string/forgot_password"
+        android:text="Quên mật khẩu"
         android:textSize="18sp"
         app:cornerRadius="10dp" />
 
     <TextView
         android:id="@+id/LoginNow"
-        android:text="@string/click_here_to_login"
+        android:text="Nhấn vào đây để đăng nhập"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
