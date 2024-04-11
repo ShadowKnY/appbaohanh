@@ -2,6 +2,8 @@ package com.example.myapplication.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +37,33 @@ public class changetuoi extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        EditText editTextTuoi = findViewById(R.id.editTextNewTuoi);
+        editTextTuoi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String tuoiText = s.toString();
+
+                try {
+                    int tuoi = Integer.parseInt(tuoiText);
+                    if (tuoi < 1 || tuoi > 100) {
+                        editTextTuoi.setError("Vui lòng nhập tuổi từ 1 đến 100");
+                    } else {
+                        editTextTuoi.setError(null);
+                    }
+                } catch (NumberFormatException e) {
+                    editTextTuoi.setError("Vui lòng nhập tuổi hợp lệ");
+                }
+            }
+        });
 
         buttonsave2.setOnClickListener(new View.OnClickListener() {
             @Override

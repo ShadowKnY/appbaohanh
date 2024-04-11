@@ -73,12 +73,37 @@ public class addActivity extends AppCompatActivity {
             String descriptionStr = description.getText().toString().trim();
 
             // Kiểm tra xem các trường input có rỗng hay không
-            if (titleStr.isEmpty() || reviewStr.isEmpty() || scoreStr.isEmpty() || numberICStr.isEmpty() || priceStr.isEmpty() || descriptionStr.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin1", Toast.LENGTH_SHORT).show();
+            if (titleStr.isEmpty() || isUploadImg1 == false || reviewStr.isEmpty() || scoreStr.isEmpty() || numberICStr.isEmpty() || priceStr.isEmpty() || descriptionStr.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
-                //dùng để kiểm tra xem người dùng đã chọn ảnh chưa
-                if(isUploadImg1){
+                //nêu các trường đã đủ và có cả ảnh thì sang sI để lưu ảnh đó vào database
                     saveImage();
+            }
+        });
+
+        //mở trình chọn ảnh
+        uploadPicture1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);//mở thư viện ảnh
+                photoPicker.setType("image/*");
+                activityResultLauncher.launch(photoPicker);
+            }
+        });
+
+        //kiểm tra xem ảnh đã được chọn chưa
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    uri = data.getData();//nhận địa chỉ của hình ảnh vừa add
+                    uploadPicture1.setImageURI(uri);
+                    isUploadImg1 = true;
+                    //đã chọn thành công, set ảnh bằng giá trị của uri(getData từ thư viện)
+                } else {
+                    isUploadImg1 = false;
+                    Toast.makeText(addActivity.this, "Không có ảnh nào được chọn", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -90,36 +115,11 @@ public class addActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    uri = data.getData();
-                    uploadPicture1.setImageURI(uri);
-                    isUploadImg1 = true;
-                } else {
-                    isUploadImg1 = false;
-                    Toast.makeText(addActivity.this, "Không có ảnh nào được chọn", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        uploadPicture1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent photoPicker = new Intent(Intent.ACTION_PICK);
-                photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
-            }
-        });
     }
 
     public void saveImage() {
         if (uri != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImgage").child(Objects.requireNonNull(uri.getLastPathSegment()));
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImage").child(Objects.requireNonNull(uri.getLastPathSegment()));
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -142,7 +142,6 @@ public class addActivity extends AppCompatActivity {
         String priceStr = price.getText().toString().trim();
         String descriptionStr = description.getText().toString().trim();
         if (titleStr.isEmpty() || reviewStr.isEmpty() || scoreStr.isEmpty() || numberICStr.isEmpty() || priceStr.isEmpty() || descriptionStr.isEmpty()) {
-            // Hiển thị thông báo lỗi nếu có trường nào đó bị trống
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin2", Toast.LENGTH_SHORT).show();
             return; // Trở về ngay sau khi gặp lỗi
         }
@@ -161,11 +160,9 @@ public class addActivity extends AppCompatActivity {
             PopularDomain product = new PopularDomain(titleStr, imageURL1, review, score, numberInChart, price, descriptionStr,productId,category);
             databaseRef.child(productId).setValue(product).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    // Hiển thị thông báo khi sản phẩm được thêm thành công
                     Toast.makeText(this, "Sản phẩm đã được thêm vào " + category, Toast.LENGTH_SHORT).show();
-                    finish(); // Đóng activity sau khi thêm sản phẩm thành công
+                    finish();
                 } else {
-                    // Hiển thị thông báo khi có lỗi xảy ra khi thêm sản phẩm
                     Toast.makeText(this, "Đã xảy ra lỗi. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                 }
             });

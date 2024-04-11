@@ -187,7 +187,7 @@ public class editDeleteActivity extends AppCompatActivity {
 
     public void saveImage() {
         if (uri != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImgage").child(Objects.requireNonNull(uri.getLastPathSegment()));
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImage").child(Objects.requireNonNull(uri.getLastPathSegment()));
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

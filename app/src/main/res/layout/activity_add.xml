@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_edit_delete.addActivity">
+    tools:context=".add_edit_delete.editDeleteActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
