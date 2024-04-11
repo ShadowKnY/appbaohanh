@@ -70,6 +70,7 @@ public class displayAdapter extends RecyclerView.Adapter<displayAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("itemPic",product.getPicUrl());
                 intent.putExtra("titleDetail",product.getTitle());

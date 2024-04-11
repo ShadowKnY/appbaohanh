@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","iPhone");
                 startActivity(intent);
-
-                //chấm dứt MainActivity
-                finish();
             }
         });
 
@@ -63,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","mac");
                 startActivity(intent);
-
-                //chấm dứt MainActivity
-                finish();
             }
         });
 
@@ -77,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","iPad");
                 startActivity(intent);
-
-                //chấm dứt MainActivity
-                finish();
             }
         });
 
@@ -91,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 //lấy id của view để đối chiếu với firebase
                 intent.putExtra("category","appleWatch");
                 startActivity(intent);
-                //chấm dứt MainActivity
-                finish();
             }
         });
 
@@ -105,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("category", "Product");
                 intent.putExtra("showAllProducts", true); // Thêm dòng này để chỉ định hiển thị tất cả các sản phẩm
                 startActivity(intent);
-                //chấm dứt MainActivity
-                finish();
             }
         });
         menu_cart.setOnClickListener(new View.OnClickListener() {
@@ -114,17 +101,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Cart.class);
                 startActivity(intent);
-
             }
         });
-
     }
 
     private void initRecycleView() {
         ArrayList<PopularDomain> items = new ArrayList<>();
-        items.add(new PopularDomain("iPhone 15 Pro Max ","item_1",15,4,2,999,""));
-        items.add(new PopularDomain("iPhone 14 Pro","item_3",50,4.8,15,899,""));
-        items.add(new PopularDomain("Apple Watch Ultra","cat4",24,4,25,699,""));
+        items.add(new PopularDomain("iPhone 15 Pro Max ","item_1",15,4,2,999,"","1"));
+        items.add(new PopularDomain("iPhone 14 Pro","item_3",50,4.8,15,899,"","2"));
+        items.add(new PopularDomain("Apple Watch Ultra","cat4",24,4,25,699,"","3"));
         items.add(new PopularDomain("iPad Pro 2023","cat3",11,3,26,799,""));
         items.add(new PopularDomain("MacBook Pro 16'","item_4",16,4.3,16,1999,""));
 

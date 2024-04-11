@@ -110,8 +110,10 @@ public class DetailActivity extends AppCompatActivity {
             // Tạo chuỗi ngày tháng để làm key cho sản phẩm trong giỏ hàng
             String cartItemId = year + "-" + month + "-" + day + "_" + hour + "-" + minute + "-" + second;
 
-            // Thêm sản phẩm vào giỏ hàng trên Firebase Realtime Database
+            product.setItemId(cartItemId);
+        // Thêm sản phẩm vào giỏ hàng trên Firebase Realtime Database
             DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("carts").child(userId);
+            PopularDomain productAdd = new PopularDomain(product.getTitle(),product.getPicUrl(), product.getReview(),product.getScore(),product.getNumberInChart(), product.getPrice(), product.getDecription(),cartItemId);
             cartRef.child(cartItemId).setValue(product)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -128,5 +130,6 @@ public class DetailActivity extends AppCompatActivity {
                         }
                     });
         }
+
 
     }

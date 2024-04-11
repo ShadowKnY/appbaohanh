@@ -75,7 +75,7 @@
                 android:background="@drawable/grey_background">
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/taxTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -91,14 +91,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Total Tax"
+                    android:text="Total Tax (VAT 8%)"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/dlvTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -121,7 +121,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/subtotalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -170,7 +170,7 @@
                     app:layout_constraintTop_toTopOf="@+id/view2" />
 
                 <TextView
-                    android:id="@+id/textView28"
+                    android:id="@+id/totalTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
