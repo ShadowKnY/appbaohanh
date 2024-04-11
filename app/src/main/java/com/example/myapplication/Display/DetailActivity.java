@@ -60,15 +60,6 @@ public class DetailActivity extends AppCompatActivity {
             ratingTxt.setText(String.valueOf(productData.getScore()));
             numberInChartTxt.setText(String.valueOf(productData.getNumberInChart()));
             descriptionTxt.setText(productData.getDecription());
-            // Picasso.get().load(getIntent().getStringExtra("itemPic"))
-            //         .placeholder(R.drawable.grey_background)
-            //         .into(itemPic);
-            // titleTxt.setText(getIntent().getStringExtra("titleDetail"));
-            // priceTxt.setText(String.valueOf(getIntent().getDoubleExtra("priceDetail", 0.0)));
-            // reviewTxt.setText(String.valueOf(getIntent().getIntExtra("reviewDetail",0)));
-            // ratingTxt.setText(String.valueOf(getIntent().getDoubleExtra("ratingDetail", 0.0)));
-            // numberInChartTxt.setText(String.valueOf(getIntent().getIntExtra("numberInChartDetail", 0)));
-            // descriptionTxt.setText(getIntent().getStringExtra("descriptionDetail"));
         }
 
 
@@ -84,20 +75,6 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, editDeleteActivity.class);
                 intent.putExtra("DataProduct", productData.toString());
-
-//                intent.putExtra("category", category);
-//
-//                // Đặt các thông tin sản phẩm vào Intent
-//                intent.putExtra("category", category);
-//                intent.putExtra("title", titleTxt.getText().toString());
-//                intent.putExtra("price", priceTxt.getText().toString());
-//                intent.putExtra("review", reviewTxt.getText().toString());
-//                intent.putExtra("score", ratingTxt.getText().toString());
-//                intent.putExtra("description", descriptionTxt.getText().toString());
-//                intent.putExtra("numberInChart", numberInChartTxt.getText().toString());
-//                intent.putExtra("picUrl", getIntent().getStringExtra("itemPic"));
-
-                // Chuyển sang activity tương ứng
                 startActivity(intent);
             }
         });

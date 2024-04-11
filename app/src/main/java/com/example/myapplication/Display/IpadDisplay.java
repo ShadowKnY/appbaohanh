@@ -36,14 +36,14 @@ public class IpadDisplay extends AppCompatActivity {
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
     private ImageView backBtn;
-    String category;
-    FloatingActionButton addBtn;
+    private String category;
+    private ImageView addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-        menu_cart = findViewById(R.id.menu_cart);
-        menu_in4 = findViewById(R.id.menu_in4);
+//        menu_cart = findViewById(R.id.menu_cart);
+//        menu_in4 = findViewById(R.id.menu_in4);
         addBtn = findViewById(R.id.addCircle);
         backBtn = findViewById(R.id.backBtn);
 //        menu_cart.setOnClickListener(new View.OnClickListener() {
@@ -53,13 +53,13 @@ public class IpadDisplay extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-        menu_in4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), info.class);
-                startActivity(intent);
-            }
-        });
+//        menu_in4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), info.class);
+//                startActivity(intent);
+//            }
+//        });
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

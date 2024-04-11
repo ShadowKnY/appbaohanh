@@ -7,12 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
+//import com.example.myapplication.login.change_password;
 import com.example.myapplication.login.lich_loginform;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Calendar;
 
@@ -37,6 +47,8 @@ public class info extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         Button backButton = findViewById(R.id.back_button);
+        Button dmkButoon = findViewById(R.id.dmk_button);
+        Button deleteButton = findViewById(R.id.delete_button);
 
         textViewUsername = findViewById(R.id.textViewUsername);
         textViewPhone = findViewById(R.id.textViewPhone);
@@ -49,7 +61,6 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changename.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -58,7 +69,6 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changephone.class);
                 startActivity(intent);
-                finish();
             }
         });
         textViewTuoi.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +76,6 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changetuoi.class);
                 startActivity(intent);
-                finish();
             }
         });
         textViewGt.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +83,6 @@ public class info extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(info.this, changegt.class);
                 startActivity(intent);
-                finish();
             }
         });
         textViewDate.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +100,22 @@ public class info extends AppCompatActivity {
                 finish();
             }
         });
+//        dmkButoon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(info.this, change_password.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteConfirmationDialog();
+            }
+        });
 
-         //Kết nối đến Firebase
+        //Kết nối đến Firebase
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String userId = user.getUid();
@@ -130,6 +152,7 @@ public class info extends AppCompatActivity {
 
 
 
+
     }
     public void logoutClick(View view) {
         logout();
@@ -137,9 +160,9 @@ public class info extends AppCompatActivity {
     private void logout() {
         FirebaseAuth.getInstance().signOut();
         // Điều hướng đến màn hình đăng nhập hoặc màn hình khác tùy theo thiết kế của ứng dụng của bạn.
-         Intent intent = new Intent(info.this, lich_loginform.class);
-                 startActivity(intent);
-                 finish();
+        Intent intent = new Intent(info.this, lich_loginform.class);
+        startActivity(intent);
+        finish();
     }
     private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
@@ -181,6 +204,64 @@ public class info extends AppCompatActivity {
             loadInfoForm();
         }
     }
+    private void showDeleteConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận xóa tài khoản");
+        builder.setMessage("Bạn có chắc chắn muốn xóa tài khoản không?");
+
+        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Thực hiện xóa tài khoản từ Firebase
+                deleteAccountFromFirebase();
+            }
+        });
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+    }
+    private void deleteAccountFromFirebase() {
+        // Kết nối đến Firebase
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        String userId = user.getUid();
+
+        // Xóa tài khoản người dùng từ Firebase Authentication
+        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    // Xóa tài khoản người dùng từ Firebase Realtime Database
+                    ref.child("users").child(userId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Xóa thành công
+                                // Điều hướng đến màn hình đăng nhập hoặc màn hình khác tùy theo thiết kế của ứng dụng của bạn.
+                                Intent intent = new Intent(info.this, lich_loginform.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Xảy ra lỗi khi xóa tài khoản từ Firebase Realtime Database
+                                Toast.makeText(info.this, "Lỗi xóa tài khoản từ Firebase Realtime Database", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    // Xảy ra lỗi khi xóa tài khoản từ Firebase Authentication
+                    Toast.makeText(info.this, "Lỗi xóa tài khoản từ Firebase Authentication", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 
 
 }

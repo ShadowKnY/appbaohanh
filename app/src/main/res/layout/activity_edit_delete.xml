@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -45,74 +45,133 @@
 
                 <ImageView
                     android:id="@+id/uploadPicture1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:src="@drawable/add_pic" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm:"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
 
             <EditText
                 android:id="@+id/title_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView1"
+                android:layout_below="@id/title_label"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Tên sản phẩm"
                 android:inputType="textMultiLine|textCapSentences" />
+
+            <TextView
+                android:id="@+id/description_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả sản phẩm:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/description_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title_txt"
+                android:layout_below="@id/description_label"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Mô tả sản phẩm"
                 android:inputType="textMultiLine|textCapSentences" />
+
+            <TextView
+                android:id="@+id/price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mức giá:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/price_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/description_txt"
+                android:layout_below="@id/price_label"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Mức giá"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
 
+            <TextView
+                android:id="@+id/review_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lượt bình luận:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/review_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Lượt bình luân"
+                android:hint="Lượt bình luận"
                 android:inputType="number" />
+
+            <TextView
+                android:id="@+id/score_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Điểm đánh giá:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/score_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/review_txt"
+                android:layout_below="@id/score_label"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Điểm đánh giá"
-                android:inputType="text" />
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/numberInChart_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng tồn kho:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/numberInChart_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/score_txt"
+                android:layout_below="@id/numberInChart_label"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Số lượng tồn kho"
                 android:inputType="number" />

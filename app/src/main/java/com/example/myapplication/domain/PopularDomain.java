@@ -14,10 +14,19 @@ public class PopularDomain {
     private double price;
     private String decription;
     private String itemId;
-
+    //them
+    private int quantity;
     private String category;
 
     public PopularDomain() {
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getCategory() {
@@ -34,6 +43,10 @@ public class PopularDomain {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public PopularDomain(int quantity) {
+        this.quantity = quantity;
     }
 
     public PopularDomain(String title, String picUrl, int review, double score, int numberInChart, double price, String decription) {

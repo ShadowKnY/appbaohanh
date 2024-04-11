@@ -86,7 +86,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Mức giá"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <EditText
                     android:id="@+id/review_txt"
@@ -95,7 +95,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Lượt bình luân"
+                    android:hint="Lượt bình luận"
                     android:inputType="number" />
 
                 <EditText
@@ -106,7 +106,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Điểm đánh giá"
-                    android:inputType="text" />
+                    android:inputType="numberDecimal" />
 
                 <EditText
                     android:id="@+id/numberInChart_txt"
