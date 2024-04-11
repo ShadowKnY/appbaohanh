@@ -20,6 +20,8 @@ import com.example.myapplication.R;
 //import com.example.myapplication.login.change_password;
 import com.example.myapplication.login.lich_loginform;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -78,13 +80,40 @@ public class info extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        final String[] options = {"Nam", "Nữ", "Khác"};
+        final TextView textViewGt = findViewById(R.id.textViewGt);
+
         textViewGt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(info.this, changegt.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(info.this);
+                builder.setTitle("Chọn giới tính");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedOption = options[which];
+                        textViewGt.setText(selectedOption);
+                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+                        userRef.child("gioiTinh").setValue(selectedOption)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(info.this, "Lưu giới tính thành công", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(info.this, "Lưu giới tính thất bại", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+                builder.show();
             }
         });
+
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
