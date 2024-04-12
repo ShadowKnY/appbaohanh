@@ -85,6 +85,7 @@ public class editDeleteActivity extends AppCompatActivity {
             String productString = extras.getString("DataProduct");
             Gson gson = new Gson();
             productData = gson.fromJson(productString, PopularDomain.class);
+
             uri = Uri.parse(productData.getPicUrl());
             Picasso.get().load(productData.getPicUrl()).into(uploadPicture1);
             category = productData.getCategory();
@@ -95,27 +96,14 @@ public class editDeleteActivity extends AppCompatActivity {
             scoreTxt.setText(String.valueOf(productData.getScore()));
             numberInChartTxt.setText(String.valueOf(productData.getNumberInChart()));
             isUploadImg1 = true;
-//            title = getIntent().getStringExtra("title"); // Changed from productId to title
-//
-//            // Hiển thị thông tin sản phẩm trong EditText
-//            titleTxt.setText(extras.getString("title"));
-//            descriptionTxt.setText(extras.getString("description"));
-//            priceTxt.setText(extras.getString("price"));
-//            picUrlTxt.setText(extras.getString("picUrl"));
-//            reviewTxt.setText(extras.getString("review"));
-//            scoreTxt.setText(extras.getString("score"));
-//            numberInChartTxt.setText(extras.getString("numberInChart"));
         } else {
-            // Nếu không nhận được dữ liệu, có thể hiển thị thông báo lỗi
             Toast.makeText(this, "Không nhận được thông tin sản phẩm", Toast.LENGTH_SHORT).show();
-            finish(); // Kết thúc activity hiện tại
+            finish();
         }
 
-        // Xử lý sự kiện của nút "Lưu"
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Lấy thông tin đã chỉnh sửa từ các trường EditText
                 Toast.makeText(editDeleteActivity.this, "Đang cập nhật", Toast.LENGTH_SHORT).show();
 
                 Uri uriTmp = uri;
@@ -129,61 +117,6 @@ public class editDeleteActivity extends AppCompatActivity {
                         saveImage();
                     }
                 }
-
-
-//                String title = titleTxt.getText().toString().trim();
-//                String description = descriptionTxt.getText().toString().trim();
-//                String priceStr = priceTxt.getText().toString().trim();
-//                String picUrl = picUrlTxt.getText().toString().trim();
-//                String reviewStr = reviewTxt.getText().toString().trim();
-//                String scoreStr = scoreTxt.getText().toString().trim();
-//                String numberInChartStr = numberInChartTxt.getText().toString().trim();
-//                if(productData != null){
-//                    if (title.isEmpty() || picUrl.isEmpty() || reviewStr.isEmpty() || scoreStr.isEmpty() || numberInChartStr.isEmpty() || priceStr.isEmpty() || description.isEmpty()) {
-//                        Toast.makeText(editDeleteActivity.this, "Hãy điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        if(productData.getCategory() != null){
-//                            int review = Integer.parseInt(reviewStr);
-//                            double score = Double.parseDouble(scoreStr);
-//                            int numberInChart = Integer.parseInt(numberInChartStr);
-//                            double price = Double.parseDouble(priceStr);
-//
-//                            // Lưu thông tin đã chỉnh sửa vào Firebase Database
-//                            String category = productData.getCategory(); // Thay thế bằng biến chứa tên danh mục sản phẩm
-//
-////                    DatabaseReference productRef = FirebaseDatabase.getInstance().getReference().child("Product").child(category).child(productData.getItemId());
-////                    PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
-////
-////                    productRef.setValue(product).addOnCompleteListener(task -> {
-////                        if (task.isSuccessful()) {
-////                            Toast.makeText(editDeleteActivity.this, "Sản phẩm đã được cập nhật", Toast.LENGTH_SHORT).show();
-////                            finish(); // Kết thúc activity sau khi cập nhật thành công
-////                        } else {
-////                            Toast.makeText(editDeleteActivity.this, "Đã xảy ra lỗi. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
-////                        }
-////                    });
-//
-//
-//                            DatabaseReference productRef = FirebaseDatabase.getInstance().getReference().child("Product").child(category).child(productData.getItemId());
-//
-//                            PopularDomain product = new PopularDomain(title, picUrl, review, score, numberInChart, price, description);
-//                            HashMap<String, Object> productValues = product.toMap(); // Assume PopularDomain has a method toMap() returning a HashMap
-//
-//                            productRef.updateChildren(productValues).addOnCompleteListener(task -> {
-//                                if (task.isSuccessful()) {
-//                                    Toast.makeText(editDeleteActivity.this, "Sản phẩm đã được cập nhật", Toast.LENGTH_SHORT).show();
-//                                    finish(); // Kết thúc activity sau khi cập nhật thành công
-//                                } else {
-//                                    Toast.makeText(editDeleteActivity.this, "Đã xảy ra lỗi. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-//                        }else {
-//                            Toast.makeText(editDeleteActivity.this, "product này không có category", Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                    }
-//                }
-
             }
         });
 
@@ -194,10 +127,8 @@ public class editDeleteActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(editDeleteActivity.this);
                 builder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này?")
                         .setPositiveButton("Có", (dialog, which) -> {
-                        // Thực hiện xóa sản phẩm khỏi cơ sở dữ liệu Firebase
+                            // Thực hiện xóa sản phẩm khỏi cơ sở dữ liệu Firebase
                             deleteProductFromFirebase();
-
-//                            deleteProductFromFirebase(category, title);
                         })
                         .setNegativeButton("Không", null)
                         .show();
@@ -225,7 +156,6 @@ public class editDeleteActivity extends AppCompatActivity {
                 Intent photoPicker = new Intent(Intent.ACTION_PICK);
                 photoPicker.setType("image/*");
                 activityResultLauncher.launch(photoPicker);
-
             }
         });
     }
@@ -265,7 +195,7 @@ public class editDeleteActivity extends AppCompatActivity {
                     while (!uriTask.isComplete()) ;
                     Uri urlImage = uriTask.getResult();
                     imageURL1 = String.valueOf(urlImage);
-// Lấy thông tin đã chỉnh sửa từ các trường EditText
+
                     uploadData();
                 }
             });

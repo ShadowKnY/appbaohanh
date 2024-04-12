@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -43,12 +44,26 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/uploadPicture1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/add_pic" />
+                </LinearLayout>
+
+
                 <EditText
                     android:id="@+id/title_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Tên sản phẩm"
                     android:inputType="textMultiLine|textCapSentences" />
@@ -71,19 +86,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Mức giá"
-                    android:inputType="number" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/uploadPicture1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/anhnen1" />
-                </LinearLayout>
+                    android:inputType="numberDecimal" />
 
                 <EditText
                     android:id="@+id/review_txt"
@@ -92,8 +95,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Lượt bình luân"
-                    android:inputType="textMultiLine|textCapSentences" />
+                    android:hint="Lượt bình luận"
+                    android:inputType="number" />
 
                 <EditText
                     android:id="@+id/score_txt"
@@ -103,7 +106,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Điểm đánh giá"
-                    android:inputType="textMultiLine|textCapSentences" />
+                    android:inputType="numberDecimal" />
 
                 <EditText
                     android:id="@+id/numberInChart_txt"
@@ -113,7 +116,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     android:hint="Số lượng tồn kho"
-                    android:inputType="textMultiLine|textCapSentences" />
+                    android:inputType="number" />
 
                 <Button
                     android:id="@+id/add_btn"

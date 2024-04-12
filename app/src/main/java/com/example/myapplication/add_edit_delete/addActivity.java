@@ -42,13 +42,14 @@ public class addActivity extends AppCompatActivity {
     String imageURL1;
     Uri uri;
     boolean isUploadImg1;
+    //nhận kết quả từ các hoạt động con
     private ActivityResultLauncher<Intent> activityResultLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        // Ánh xạ các view
+        //khởi tạo biến và ánh xạ các view
         title = findViewById(R.id.title_txt);
         description = findViewById(R.id.description_txt);
         price = findViewById(R.id.price_txt);
@@ -59,13 +60,12 @@ public class addActivity extends AppCompatActivity {
         back_btn = findViewById(R.id.backBtn);
         uploadPicture1 = findViewById(R.id.uploadPicture1);
 
-        // Lấy loại sản phẩm từ intent hoặc từ biến truyền vào
+        //intent đưuọc truyền từ activity hiển thị
         category = getIntent().getStringExtra("category");
 
         // Thêm sản phẩm khi nhấn nút "Thêm"
         findViewById(R.id.add_btn).setOnClickListener(v -> {
             String titleStr = title.getText().toString().trim();
-//            String picUrlStr = picUrl.getText().toString().trim();
             String reviewStr = review.getText().toString().trim();
             String scoreStr = score.getText().toString().trim();
             String numberICStr = numberIC.getText().toString().trim();
@@ -74,23 +74,23 @@ public class addActivity extends AppCompatActivity {
 
             // Kiểm tra xem các trường input có rỗng hay không
             if (titleStr.isEmpty() || reviewStr.isEmpty() || scoreStr.isEmpty() || numberICStr.isEmpty() || priceStr.isEmpty() || descriptionStr.isEmpty()) {
-                // Hiển thị thông báo lỗi nếu có trường nào đó bị trống
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin1", Toast.LENGTH_SHORT).show();
             } else {
-                // Thêm sản phẩm vào cơ sở dữ liệu Firebase
-//                addProductToFirebase(titleStr, imageURL1, reviewStr, scoreStr, numberICStr, priceStr, descriptionStr);
+                //dùng để kiểm tra xem người dùng đã chọn ảnh chưa
                 if(isUploadImg1){
                     saveImage();
                 }
             }
         });
 
+        //nut quay lại
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
 
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -102,7 +102,7 @@ public class addActivity extends AppCompatActivity {
                     isUploadImg1 = true;
                 } else {
                     isUploadImg1 = false;
-                    Toast.makeText(addActivity.this, "No image selected", Toast.LENGTH_LONG).show();
+                    Toast.makeText(addActivity.this, "Không có ảnh nào được chọn", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -117,10 +117,25 @@ public class addActivity extends AppCompatActivity {
         });
     }
 
+    public void saveImage() {
+        if (uri != null) {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImgage").child(Objects.requireNonNull(uri.getLastPathSegment()));
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    imageURL1 = String.valueOf(urlImage);
+                    addProductToFirebase();
+                }
+            });
+        }
+    }
+
     private void addProductToFirebase() {
         // Kiểm tra tính hợp lệ của dữ liệu đầu vào
         String titleStr = title.getText().toString().trim();
-//            String picUrlStr = picUrl.getText().toString().trim();
         String reviewStr = review.getText().toString().trim();
         String scoreStr = score.getText().toString().trim();
         String numberICStr = numberIC.getText().toString().trim();
@@ -161,20 +176,5 @@ public class addActivity extends AppCompatActivity {
         }
     }
 
-    public void saveImage() {
-        if (uri != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ProductImgage").child(Objects.requireNonNull(uri.getLastPathSegment()));
-            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!uriTask.isComplete()) ;
-                    Uri urlImage = uriTask.getResult();
-                    imageURL1 = String.valueOf(urlImage);
-//                    onClickPushData();
-                    addProductToFirebase();
-                }
-            });
-        }
-    }
+
 }
