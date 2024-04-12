@@ -110,13 +110,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        menu_cart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, Cart.class);
-//                startActivity(intent);
-//            }
-//        });
+        menu_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Cart.class);
+
+                startActivity(intent);
+
+            }
+        });
 
         in4_dashBoard.setOnClickListener(new View.OnClickListener() {
             @Override

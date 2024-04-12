@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Activity.MainActivity;
 import com.example.myapplication.R;
 //import com.example.myapplication.login.change_password;
+import com.example.myapplication.login.change_password;
 import com.example.myapplication.login.lich_loginform;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -129,14 +130,14 @@ public class info extends AppCompatActivity {
                 finish();
             }
         });
-//        dmkButoon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(info.this, change_password.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        dmkButoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(info.this, change_password.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,6 +244,7 @@ public class info extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Thực hiện xóa tài khoản từ Firebase
                 deleteAccountFromFirebase();
+                finish();
             }
         });
 

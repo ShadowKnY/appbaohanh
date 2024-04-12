@@ -69,6 +69,7 @@ public class editDeleteActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         uploadPicture1 = findViewById(R.id.uploadPicture1);
 
+        // nút quay lai
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class editDeleteActivity extends AppCompatActivity {
         // Khởi tạo DatabaseReference
         databaseRef = FirebaseDatabase.getInstance().getReference().child("Product");
 
-        // Lấy thông tin sản phẩm từ Intent
+        // Lấy thông tin sản phẩm từ DP, trong detail
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String productString = extras.getString("DataProduct");
@@ -106,19 +107,19 @@ public class editDeleteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(editDeleteActivity.this, "Đang cập nhật", Toast.LENGTH_SHORT).show();
 
-                Uri uriTmp = uri;
-                System.out.println("urr của tôi:"+uri.toString());
-
                 if(isUploadImg1){
-                    if ( uriTmp.toString().contains("https")) {
+                    //ktra xem đây có phải ảnh cũ trên FB không
+                    if (uri.toString().contains("https")) {
+                        //đúng rồi thì ko thay đổi và sửa
                         imageURL1 = uri.toString();
                         uploadData();
-                    }else {
+                    } else {
                         saveImage();
                     }
                 }
             }
         });
+
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,7 +196,6 @@ public class editDeleteActivity extends AppCompatActivity {
                     while (!uriTask.isComplete()) ;
                     Uri urlImage = uriTask.getResult();
                     imageURL1 = String.valueOf(urlImage);
-
                     uploadData();
                 }
             });
@@ -237,7 +237,7 @@ public class editDeleteActivity extends AppCompatActivity {
                         }
                     });
                 }else {
-                    Toast.makeText(editDeleteActivity.this, "product này không có category", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(editDeleteActivity.this, "Product này không có category", Toast.LENGTH_SHORT).show();
                 }
 
             }

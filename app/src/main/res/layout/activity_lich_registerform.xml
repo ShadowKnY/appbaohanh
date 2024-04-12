@@ -106,15 +106,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/forgotButton"
-        android:layout_width="351dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/purple"
-        android:text="Quên mật khẩu"
-        android:textSize="18sp"
-        app:cornerRadius="10dp" />
-
     <TextView
         android:id="@+id/LoginNow"
         android:text="Nhấn vào đây để đăng nhập"

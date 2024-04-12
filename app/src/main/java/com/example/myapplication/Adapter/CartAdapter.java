@@ -41,9 +41,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         this.dlvTxt = dlvTxt;
         this.taxTxt = taxTxt;
         this.totalTxt = totalTxt;
-//        cartRef = FirebaseDatabase.getInstance().getReference().child("carts").child(userId);
-
+        user = firebaseAuth.getCurrentUser();
+        if(user !=null){
+            userId = user.getUid();
+        }
+        cartRef = FirebaseDatabase.getInstance().getReference().child("carts").child(userId);
     }
+
 
     @NonNull
     @Override
@@ -64,19 +68,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.minusCartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentQuantity = cartItem.getQuantity();
+                int currentQuantity = cartItems.get(holder.getAdapterPosition()).getQuantity();
                 int newQuantity = currentQuantity - 1;
                 if (newQuantity <= 0) {
-                    // Hiển thị hộp thoại xác nhận xóa sản phẩm khi số lượng giảm về 0
-                    holder.showRemoveItemDialog(cartItem.getitemId()); // Chuyển itemId vào hàm
+                    holder.showRemoveItemDialog(cartItems.get(holder.getAdapterPosition()).getItemId());
                 } else {
-                    // Giảm số lượng sản phẩm đi một đơn vị
                     holder.numberItemTxt.setText(String.valueOf(newQuantity));
-                    holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
-                    cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
-                    DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getitemId());
-                    itemRef.child("quantity").setValue(newQuantity);
-                    holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi giảm số lượng sản phẩm
+                    cartItems.get(holder.getAdapterPosition()).setQuantity(newQuantity);
+                    holder.bind(cartItems.get(holder.getAdapterPosition())); // Cập nhật totalEachItem của mặt hàng sau khi thay đổi số lượng
+                    holder.updateSubtotal();
                     holder.updateDelivery();
                     holder.updateTax();
                     holder.updateTotal();
@@ -87,15 +87,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.plusCartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentQuantity = cartItem.getQuantity();
+                int currentQuantity = cartItems.get(holder.getAdapterPosition()).getQuantity();
                 int newQuantity = currentQuantity + 1;
-                // Tăng số lượng sản phẩm lên một
                 holder.numberItemTxt.setText(String.valueOf(newQuantity));
-                holder.totalEachitem.setText(String.format("%.2f", cartItem.getPrice() * newQuantity));
-                cartItem.setQuantity(newQuantity); // Cập nhật số lượng trong cartItem
-                DatabaseReference itemRef = cartRef.child(userId).child(cartItem.getitemId());
-                itemRef.child("quantity").setValue(newQuantity);
-                holder.updateSubtotal(); // Cập nhật tổng số tiền sau khi tăng số lượng sản phẩm
+                cartItems.get(holder.getAdapterPosition()).setQuantity(newQuantity);
+                holder.bind(cartItems.get(holder.getAdapterPosition())); // Cập nhật totalEachItem của mặt hàng sau khi thay đổi số lượng
+                holder.updateSubtotal();
                 holder.updateDelivery();
                 holder.updateTax();
                 holder.updateTotal();
@@ -143,30 +140,29 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         }
 
-        private void showRemoveItemDialog(String itemId) { // Thêm tham số itemId vào hàm
+        private void showRemoveItemDialog(String itemId) {
             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
             builder.setMessage("Do you want to remove this item from cart?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // Xóa mục khỏi Firebase
-                            if (userId != null) {
-                                if(cartItem != null){
-                                    DatabaseReference itemRef = FirebaseDatabase.getInstance()
-                                            .getReference("carts")
-                                            .child(userId) // userId là ID của người dùng hiện tại
-                                            .child(cartItem.getitemId()); // Sử dụng itemId để xóa mục
-                                    itemRef.removeValue();
-                                    // Xóa mục khỏi danh sách cartItems và cập nhật giao diện
-                                    int position = getAbsoluteAdapterPosition();
-                                    if (position != RecyclerView.NO_POSITION) {
-                                        cartItems.remove(position);
-                                        notifyItemRemoved(position);
-                                        notifyItemRangeChanged(position, cartItems.size());
-                                    } else {
-                                        Log.e("CartAdapter", "userId is null");
-                                    }
-                                }}
+                            if (userId != null && cartItem != null && cartItem.getItemId() != null) {
+                                DatabaseReference itemRef = FirebaseDatabase.getInstance()
+                                        .getReference("carts")
+                                        .child(userId)
+                                        .child(cartItem.getItemId());
+                                itemRef.removeValue();
+                                int position = getAbsoluteAdapterPosition();
+                                if (position != RecyclerView.NO_POSITION) {
+                                    cartItems.remove(position);
+                                    notifyItemRemoved(position);
+                                    notifyItemRangeChanged(position, cartItems.size());
+                                } else {
+                                    Log.e("CartAdapter", "Invalid adapter position");
+                                }
+                            } else {
+                                Log.e("CartAdapter", "userId or cartItem is null");
+                            }
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -177,6 +173,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     })
                     .show();
         }
+
         private void updateSubtotal() {
             double subtotal = 0;
             for (PopularDomain item : cartItems) {

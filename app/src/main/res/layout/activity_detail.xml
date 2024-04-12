@@ -198,17 +198,17 @@
                 android:layout_margin="16dp"
                 android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/buyBtn"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        style="@android:style/Widget.Button"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:background="@drawable/btn_background"
-                        android:text="Mua Ngay"
-                        android:textSize="16sp"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buyBtn"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/btn_background"
+                    android:text="Thêm Vào Giỏ Hàng"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/editBtn"
