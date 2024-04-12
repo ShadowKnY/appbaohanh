@@ -3,6 +3,7 @@ package com.example.myapplication.Display;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -11,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Activity.Cart;
-import com.example.myapplication.Activity.MainActivity;
+//import com.example.myapplication.Activity.Cart;
 import com.example.myapplication.Adapter.displayAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.add_edit_delete.addActivity;
@@ -31,52 +31,48 @@ import java.util.List;
 public class IpadDisplay extends AppCompatActivity {
 
 
-    LinearLayout menu_cart,menu_in4,homeBtn;
+    LinearLayout menu_cart,menu_in4;
     private RecyclerView rcvProduct;
     private displayAdapter mdisplayAdapter;
     private List<PopularDomain> mlistProduct;
-    String category;
-    FloatingActionButton addBtn;
+    private ImageView backBtn;
+    private String category;
+    private ImageView addBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-        menu_cart = findViewById(R.id.menu_cart);
-        menu_in4 = findViewById(R.id.menu_in4);
+//        menu_cart = findViewById(R.id.menu_cart);
+//        menu_in4 = findViewById(R.id.menu_in4);
         addBtn = findViewById(R.id.addCircle);
-
-        homeBtn = findViewById(R.id.homeBtn);
-
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        menu_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Cart.class);
-                startActivity(intent);
-
-            }
-        });
-        menu_in4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), info.class);
-                startActivity(intent);
-            }
-        });
+        backBtn = findViewById(R.id.backBtn);
+//        menu_cart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), Cart.class);
+//                startActivity(intent);
+//            }
+//        });
+//        menu_in4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), info.class);
+//                startActivity(intent);
+//            }
+//        });
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(IpadDisplay.this, addActivity.class);
                 i.putExtra("category", category);
                 startActivity(i);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -93,6 +89,7 @@ public class IpadDisplay extends AppCompatActivity {
                 }
             }
         }
+
     }
 
 
@@ -148,6 +145,4 @@ public class IpadDisplay extends AppCompatActivity {
             }
         });
     }
-
 }
-

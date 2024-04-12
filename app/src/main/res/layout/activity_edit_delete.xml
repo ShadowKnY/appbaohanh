@@ -1,0 +1,210 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add_edit_delete.addActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/arrow" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SỬA, XÓA SẢN PHẨM"
+                android:textColor="@color/purple_Dark"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/uploadPicture1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/add_pic" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm:"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+
+            <EditText
+                android:id="@+id/title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_label"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Tên sản phẩm"
+                android:inputType="textMultiLine|textCapSentences" />
+
+            <TextView
+                android:id="@+id/description_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô tả sản phẩm:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/description_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description_label"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Mô tả sản phẩm"
+                android:inputType="textMultiLine|textCapSentences" />
+
+            <TextView
+                android:id="@+id/price_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mức giá:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/price_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price_label"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Mức giá"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/review_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lượt bình luận:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/review_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Lượt bình luận"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/score_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Điểm đánh giá:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/score_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/score_label"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Điểm đánh giá"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/numberInChart_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng tồn kho:"
+                android:textSize="18sp"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/numberInChart_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numberInChart_label"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Số lượng tồn kho"
+                android:inputType="number" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/numberInChart_txt"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="35dp"
+                    android:text="Lưu" />
+
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/numberInChart_txt"
+                    android:layout_marginStart="67dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toEndOf="@id/saveBtn"
+                    android:text="Xóa" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Thêm nút Xóa -->
+
+    </RelativeLayout>
+</ScrollView>

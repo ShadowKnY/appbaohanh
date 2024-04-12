@@ -78,6 +78,17 @@
         app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="$"
+        android:textColor="@color/purple_Dark"
+        app:layout_constraintBottom_toBottomOf="@+id/feeTxt"
+        app:layout_constraintStart_toEndOf="@+id/feeTxt"
+        app:layout_constraintTop_toTopOf="@+id/feeTxt" />
+
+    <TextView
         android:id="@+id/feeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

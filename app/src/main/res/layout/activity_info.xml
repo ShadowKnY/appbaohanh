@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
 
         <TextView
@@ -154,7 +154,16 @@
         android:id="@+id/back_button"
         android:text="Quay lại"
         android:textSize="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_button_bg"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/dmk_button"
+        android:text="Đổi mật khẩu"
+        android:textSize="15dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_button_bg"/>
 
     <Button
@@ -163,8 +172,17 @@
         android:id="@+id/logout_button"
         android:text="Đăng xuất"
         android:textSize="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:onClick="logoutClick"
+        android:background="@drawable/rounded_button_bg"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/delete_button"
+        android:text="Xóa tài khoản"
+        android:textSize="15dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_button_bg"/>
 
 </LinearLayout>

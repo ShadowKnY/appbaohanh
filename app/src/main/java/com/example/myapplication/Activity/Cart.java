@@ -1,6 +1,7 @@
 package com.example.myapplication.Activity;
 
 import android.animation.ValueAnimator;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,76 +30,114 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart extends AppCompatActivity {
-    //khởi tạo các biến
-    ImageView backBtn;
-    TextView subtotalTextView,dlvTxt,taxTxt,totalTxt;
-    LottieAnimationView animationView;
-    RecyclerView recyclerView;
-    CartAdapter adapter;
-    List<PopularDomain> cartItems;
-    DatabaseReference cartRef;
 
-    //hàm onCreate
+    // Declare variables
+    private ImageView backBtn;
+    private TextView subtotalTextView, dlvTxt, taxTxt, totalTxt;
+    private LottieAnimationView animationView;
+    private RecyclerView recyclerView;
+    private CartAdapter adapter;
+    private List<PopularDomain> cartItems;
+    private DatabaseReference cartRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-         backBtn = findViewById(R.id.backBtn);
+        // Get userId from Intent
+        String userId = getIntent().getStringExtra("userId");
 
-        //kill giao diện hiện tại và trở về giao diện trước
+        // Check if userId is valid
+        if (userId == null || userId.isEmpty()) {
+            // Handle invalid userId, for example, show an error message and return
+            return;
+        }
+
+        // Initialize UI components
+        initView();
+
+        // Set onClickListener for back button
+        initBackButton();
+
+        // Initialize RecyclerView and Adapter
+        initRecyclerView(userId);
+
+        // Initialize Firebase Database
+        initFirebase(userId);
+
+        // Initialize and show animation
+        initAnimation();
+
+        // Set onClickListener for "Order Now" button
+        initOrderNowButton();
+    }
+
+    // Initialize UI components
+    private void initView() {
+        backBtn = findViewById(R.id.backBtn);
+        subtotalTextView = findViewById(R.id.subtotalTextView);
+        taxTxt = findViewById(R.id.taxTxt);
+        dlvTxt = findViewById(R.id.dlvTxt);
+        totalTxt = findViewById(R.id.totalTxt);
+    }
+
+    // Set onClickListener for back button
+    private void initBackButton() {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
 
-        // Khởi tạo danh sách cartItems
-        cartItems = new ArrayList<>();
-
-        // Khởi tạo và cấu hình Adapter
+    // Initialize RecyclerView and Adapter
+    private void initRecyclerView(String userId) {
         recyclerView = findViewById(R.id.cartView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        subtotalTextView = findViewById(R.id.subtotalTextView); // Tìm TextView Subtotal
-        taxTxt = findViewById(R.id.taxTxt);
-        dlvTxt =findViewById(R.id.dlvTxt);
-        totalTxt = findViewById(R.id.totalTxt);
-        adapter = new CartAdapter(cartItems,subtotalTextView,dlvTxt,taxTxt,totalTxt);
+        cartItems = new ArrayList<>();
+        adapter = new CartAdapter(cartItems, subtotalTextView, dlvTxt, taxTxt, totalTxt);
         recyclerView.setAdapter(adapter);
+    }
 
-        // Thực hiện truy vấn Firebase để lấy dữ liệu giỏ hàng
-        // khởi tạo và cấu hình Firebase Database
+    // Initialize Firebase Database
+    private void initFirebase(String userId) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        String userId = user.getUid();
-
-        //cartRef sẽ trỏ đến các userID trong nút cart
-        cartRef = FirebaseDatabase.getInstance().getReference("carts").child(userId);
-        cartRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                cartItems.clear(); // Xóa danh sách cũ trước khi cập nhật mới
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    PopularDomain cartItem = snapshot.getValue(PopularDomain.class);
-                    cartItems.add(cartItem); // Thêm dữ liệu từ Firebase vào danh sách
+        if (user != null) {
+            // Get reference to user's cart in Firebase Database
+            cartRef = FirebaseDatabase.getInstance().getReference("carts").child(userId);
+            // Add ValueEventListener to fetch cart items
+            cartRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    cartItems.clear(); // Clear old cart items
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        PopularDomain cartItem = snapshot.getValue(PopularDomain.class);
+                        cartItems.add(cartItem); // Add data from Firebase to list
+                    }
+                    adapter.notifyDataSetChanged(); // Update UI with new data
                 }
-                adapter.notifyDataSetChanged(); // Cập nhật giao diện sau khi có dữ liệu mới
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Xử lý lỗi nếu cần
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle error if needed
+                }
+            });
+        }
+    }
 
-        //animation thanh toán
+    // Initialize and show animation
+    private void initAnimation() {
         animationView = new LottieAnimationView(this);
-        animationView.setAnimation(R.raw.faceid); // Replace with your Lottie animation file
+        animationView.setAnimation(R.raw.faceid);
         animationView.setRepeatCount(ValueAnimator.INFINITE);
         animationView.playAnimation();
+    }
 
-        // Get reference to "Order Now" button
+    // Set onClickListener for "Order Now" button
+    private void initOrderNowButton() {
         Button orderNowButton = findViewById(R.id.OrderNowbtn);
         orderNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +147,26 @@ public class Cart extends AppCompatActivity {
         });
     }
 
-
-    // hàm show animation khi ấn thanh toán
+    // Show order popup
     public void showOrderPopup() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View popupView = inflater.inflate(R.layout.pop_up, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(popupView);
+        builder.setView(popupView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Handle OK button click
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Handle Cancel button click
+                        dialog.dismiss();
+                    }
+                });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
